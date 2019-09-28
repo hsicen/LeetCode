@@ -1,2 +1,1 @@
-include ':app', ':lib'
-rootProject.name='LeetCode'
+include ':app', ':core'

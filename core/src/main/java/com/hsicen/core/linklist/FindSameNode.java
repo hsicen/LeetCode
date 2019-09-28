@@ -1,0 +1,32 @@
+package com.hsicen.core.linklist;
+
+/**
+ * <p>作者：Night  2019/2/1 17:26
+ * <p>邮箱：codinghuang@163.com
+ * <p>作用：
+ * <p>描述：LeetCode
+ * <p>
+ * 求两个链表的交点
+ */
+public class FindSameNode {
+
+    /**
+     * 找到相同结点
+     *
+     * @param headA headA
+     * @param headB headB
+     * @return 相同结点
+     */
+    public static ListNode getNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+
+        ListNode a = headA;
+        ListNode b = headB;
+        while (a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
+        }
+
+        return a;
+    }
+}
