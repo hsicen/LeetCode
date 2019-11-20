@@ -12,6 +12,12 @@ package com.hsicen.core.search.binary;
  * 首先要求数据是能够随机访问的，其次数据要是有序的
  * 二分查找不适合太大的数据量也不适合太小的数据量
  * <p>
+ * 常见问题分类：(数据条件：存在重复元素，数组有序)
+ * 1.查找第一个值等于给定值的元素
+ * 2.查找最后一个值等于给定值的元素
+ * 3.查找第一个大于等于给定值的元素
+ * 4.查找最后一个小于等于给定值的元素
+ * <p>
  * LeetCode：
  * 69：sqrt(x)
  * Input: 2.00000, 10
@@ -84,5 +90,55 @@ public class BinarySearch {
         } else {
             return search2(src, low, mid - 1, value);
         }
+    }
+
+    /***查找第一个值等于给定值的元素(有重复元素) */
+    private static int useSearch1(int[] src, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) >> 1;
+
+            if (src[mid] > value) {
+                high = mid - 1;
+            } else if (src[mid] < value) {
+                low = mid + 1;
+            } else {
+                //如果下标为0或者前一个不等于给定值 => 找到给定值下标
+                if ((mid == 0) || (src[mid - 1] != value)) return mid;
+                else high = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
+    /***查找最后一个值等于给定值的元素(有重复元素) */
+    private static int useSearch2(int[] src, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) >> 1;
+
+            if (src[mid] > value) {
+                high = mid - 1;
+            } else if (src[mid] < value) {
+                low = mid + 1;
+            } else {
+                //如果下标为n-1或者后一个不等于给定值 => 找到给定值下标
+                if ((mid == n - 1) || (src[mid + 1] != value)) return mid;
+                else low = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    /***查找第一个值大于给定值的元素(有重复元素)*/
+    private static int useSearch3(int[] src, int n, int value) {
+
+        return -1;
     }
 }

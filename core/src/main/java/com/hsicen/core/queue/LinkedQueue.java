@@ -1,6 +1,7 @@
 package com.hsicen.core.queue;
 
-import com.night.leetcode.linkedlist.ListNode;
+
+import com.hsicen.core.linklist.ListNode;
 
 /**
  * <p>作者：Night  2019/3/22 17:02

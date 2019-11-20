@@ -1,6 +1,7 @@
 package com.hsicen.core.stack;
 
-import com.night.leetcode.linkedlist.ListNode;
+
+import com.hsicen.core.linklist.ListNode;
 
 /**
  * <p>作者：Night  2019/3/20 20:14

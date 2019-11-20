@@ -7,4 +7,5 @@ package com.hsicen.core.search;
  * <p>描述：InterView
  */
 public class TestSearch {
+
 }
