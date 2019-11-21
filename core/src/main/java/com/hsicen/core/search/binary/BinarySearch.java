@@ -35,9 +35,19 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 34, 67, 89, 123, 567, 1234, 12345, 123456};
-        System.out.println("34 is in " + search2(data, 0, data.length - 1, 34));
-        System.out.println("1234 is in " + search2(data, 0, data.length - 1, 1234));
-        System.out.println("88 is in " + search2(data, 0, data.length - 1, 88));
+        //System.out.println("34 is in " + search2(data, 0, data.length - 1, 34));
+        //System.out.println("1234 is in " + search2(data, 0, data.length - 1, 1234));
+        //System.out.println("88 is in " + search2(data, 0, data.length - 1, 88));
+
+
+        //测试二分查找的应用
+        int[] data3 = {3, 5, 6, 8, 9,10};
+        //System.out.println("第一个大于给定值的元素下标为：" + useBinarySearch3(data3, data3.length, 5));
+        //System.out.println("第一个大于给定值的元素下标为：" + useBinarySearch3(data3, data3.length, 3));
+
+
+        System.out.println("最后一个小于等于给定值的元素下标为：" + useBinarySearch4(data3, data3.length, 7));
+        System.out.println("最后一个小于等于给定值的元素下标为：" + useBinarySearch4(data3, data3.length, 3));
     }
 
     /**
@@ -93,7 +103,7 @@ public class BinarySearch {
     }
 
     /***查找第一个值等于给定值的元素(有重复元素) */
-    private static int useSearch1(int[] src, int n, int value) {
+    private static int useBinarySearch1(int[] src, int n, int value) {
         int low = 0;
         int high = n - 1;
 
@@ -115,7 +125,7 @@ public class BinarySearch {
     }
 
     /***查找最后一个值等于给定值的元素(有重复元素) */
-    private static int useSearch2(int[] src, int n, int value) {
+    private static int useBinarySearch2(int[] src, int n, int value) {
         int low = 0;
         int high = n - 1;
 
@@ -136,8 +146,40 @@ public class BinarySearch {
         return -1;
     }
 
-    /***查找第一个值大于给定值的元素(有重复元素)*/
-    private static int useSearch3(int[] src, int n, int value) {
+    /***查找第一个(往前取，边界0)大于等于给定值的元素(有重复元素)*/
+    private static int useBinarySearch3(int[] src, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) >> 1;  //防止low+high数据溢出丨
+
+            if (src[mid] >= value) {
+                if ((mid == 0) || (src[mid - 1] < value)) return mid;
+                else high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    /***查找最后一个(往后取，边界n-1)小于等于给定值的元素(有重复元素)*/
+    private static int useBinarySearch4(int[] src, int n, int value) {
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) >> 1;  //防止low+high数据溢出
+
+            if (src[mid] > value) {
+                high = mid - 1;
+            } else {
+                if ((mid == n - 1) || (src[mid + 1] > value)) return mid;
+                else low = mid + 1;
+            }
+        }
 
         return -1;
     }
