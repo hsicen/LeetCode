@@ -41,13 +41,12 @@ public class BinarySearch {
 
 
         //测试二分查找的应用
-        int[] data3 = {3, 5, 6, 8, 9,10};
+        int[] data3 = {3, 4, 6, 7, 10};
         //System.out.println("第一个大于给定值的元素下标为：" + useBinarySearch3(data3, data3.length, 5));
         //System.out.println("第一个大于给定值的元素下标为：" + useBinarySearch3(data3, data3.length, 3));
 
-
         System.out.println("最后一个小于等于给定值的元素下标为：" + useBinarySearch4(data3, data3.length, 7));
-        System.out.println("最后一个小于等于给定值的元素下标为：" + useBinarySearch4(data3, data3.length, 3));
+        System.out.println("最后一个小于等于给定值的元素下标为：" + useBinarySearch4(data3, data3.length, 2));
     }
 
     /**
@@ -108,7 +107,7 @@ public class BinarySearch {
         int high = n - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) >> 1;
+            int mid = low + ((high - low) >> 1);
 
             if (src[mid] > value) {
                 high = mid - 1;
@@ -130,7 +129,7 @@ public class BinarySearch {
         int high = n - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) >> 1;
+            int mid = low + ((high - low) >> 1);
 
             if (src[mid] > value) {
                 high = mid - 1;
@@ -152,7 +151,7 @@ public class BinarySearch {
         int high = n - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) >> 1;  //防止low+high数据溢出丨
+            int mid = low + ((high - low) >> 1);  //防止low+high数据溢出丨
 
             if (src[mid] >= value) {
                 if ((mid == 0) || (src[mid - 1] < value)) return mid;
@@ -171,11 +170,11 @@ public class BinarySearch {
         int high = n - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) >> 1;  //防止low+high数据溢出
+            int mid = low + ((high - low) >> 1);  //防止low+high数据溢出
 
-            if (src[mid] > value) {
+            if (src[mid] > value) { //中间值大于给定值
                 high = mid - 1;
-            } else {
+            } else { //中间值小于等于给定值(判断中间值是否为最后一个值或者中间值的前一个值是否大于给定值)
                 if ((mid == n - 1) || (src[mid + 1] > value)) return mid;
                 else low = mid + 1;
             }
