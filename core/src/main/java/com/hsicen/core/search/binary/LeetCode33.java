@@ -25,61 +25,30 @@ package com.hsicen.core.search.binary;
 public class LeetCode33 {
 
     public static void main(String[] args) {
-        int[] data = new int[]{5, 6, 7, 0, 1, 2, 3, 4};
+        int[] data = new int[]{5, 6, 7, 8, 9, 0, 1, 2, 3, 4};
         int[] data1 = new int[]{5, 6, 7, 1, 2, 3, 4};
 
         System.out.println("查找1：下标为：  " + search(data, 1));
-        System.out.println("查找7：下标为：  " + search(data, 5));
+        System.out.println("查找7：下标为：  " + search(data, 4));
         System.out.println("查找1： 下标为： " + search(data1, 1));
     }
 
     private static int search(int[] nums, int target) {
-        return search(nums, 0, nums.length - 1, target);
-    }
+        if (nums == null || nums.length == 0) return -1;
 
-    private static int search(int[] nums, int start, int end, int target) {
-        int mid = start + ((end - start) >> 1);
+        int low = 0;
+        int high = nums.length - 1;
 
-        if (nums[start] > nums[mid]) {
-            //首元素大于mid  后半部分有序   前半部分循环有序   判断目标元素在哪个区间
-            if (nums[end] >= target) {
-                //目标元素在有序数组中  middle+1---end
-                return binarySearch(nums, mid + 1, end, target);
-            } else {
-                //目标元素在循环有序数组中
-                search(nums, start, mid, target);
-            }
-        } else {
-            //首元素小于mid  前半部分有序   后半部分循环有序   判断目标元素在哪个区间
-            if (nums[mid] >= target) {
-                //目标元素在有序数组中 start---middle
-                return binarySearch(nums, start, mid, target);
-            } else {
-                //目标元素在循环有序数组中
-                search(nums, mid + 1, end, target);
-            }
+        while (low < high) {
+            int mid = low + ((high - low) >> 1);
+
+            if ((nums[0] > target) ^ (nums[0] > nums[mid]) ^ (target > nums[mid]))
+                low = mid + 1;  //向后规约
+            else
+                high = mid;  //向前规约
         }
 
-        return -1;
-    }
-
-    private static int binarySearch(int[] src, int low, int high, int value) {
-
-        while (low <= high) {
-            int mid = (low + high) / 2;
-
-            if (value == src[mid]) {
-                return mid;
-            }
-
-            if (value > src[mid]) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
-        }
-
-        return -1;
+        return low == high && nums[low] == target ? low : -1;
     }
 
 }
