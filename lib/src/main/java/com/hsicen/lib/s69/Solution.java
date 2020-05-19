@@ -40,7 +40,6 @@ public class Solution {
         double res = (x + target / x) / 2;
 
         if (res == x) {
-            System.out.println("值：" + x);
             return x;
         } else {
             //继续迭代
@@ -48,6 +47,13 @@ public class Solution {
         }
     }
 
+    private double squart(double start, int target) {
+        //计算近似值
+        double tmp = (start + target / start) / 2;
+
+        if (tmp == start) return start;
+        else return squart(tmp, target);
+    }
 
     /*** 二分法查找值*/
     public static int mySqrt1(int x) {

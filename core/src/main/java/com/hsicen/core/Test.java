@@ -1,5 +1,7 @@
 package com.hsicen.core;
 
+import com.hsicen.core.singleton.EnumTon;
+
 /**
  * <p>作者：hsicen  2019/12/3 8:28
  * <p>邮箱：codinghuang@163.com
@@ -22,5 +24,10 @@ public class Test {
         System.out.println("0.3 + 0.6 = " + (0.300 * 100 + 0.6 * 100) / 100);
         System.out.println("0.9 = " + (0.9));
         System.out.println(Math.round((3495 / 1000f) * 100) / 100f);
+
+        EnumTon instance = EnumTon.INSTANCE;
+        System.out.println("result: " + instance);
+        EnumTon instance1 = EnumTon.getInstance();
+        System.out.println("result: " + instance1);
     }
 }
