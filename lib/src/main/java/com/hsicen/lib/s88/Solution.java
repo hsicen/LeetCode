@@ -10,10 +10,10 @@ package com.hsicen.lib.s88;
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums1 = {1, 3, 5, 7, 9, 0, 0, 0, 0};
-        int[] nums2 = {2, 4, 6};
-        merge(nums1, 5, nums2, 3);
-        System.out.println("Result：" + nums1);
+        int[] nums1 = {1};
+        int[] nums2 = {};
+        merge(nums1, 1, nums2, 0);
+        printArray(nums1);
     }
 
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
@@ -32,7 +32,6 @@ public class Solution {
 
             if (first <= second) {
                 nums1[lenC++] = first;
-                nums1[len - m + lenA] = 0;
                 lenA++;
             } else {
                 nums1[lenC++] = second;
@@ -42,7 +41,6 @@ public class Solution {
 
         while (lenA < m) {
             nums1[lenC++] = nums1[len - m + lenA];
-            nums1[len - m + lenA] = 0;
             lenA++;
         }
 
@@ -50,5 +48,14 @@ public class Solution {
             nums1[lenC++] = nums2[lenB];
             lenB++;
         }
+    }
+
+    private static void printArray(int[] arr) {
+        System.out.println("开始打印：");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+        System.out.println("结束打印");
     }
 }
