@@ -1,5 +1,6 @@
 package com.hsicen.lib.exam;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -21,11 +22,6 @@ public class SugarTest {
 
             String[] scores = scoreData.split(",");
             count = scores.length;
-            int[] counts = new int[count];
-
-            for (int i = 0; i < count; i++) {
-                counts[i] = 1;
-            }
 
             if (1 >= count) {
                 System.out.println(count);
@@ -39,24 +35,7 @@ public class SugarTest {
                 int first = Integer.parseInt(scores[0]);
                 int second = Integer.parseInt(scores[1]);
 
-                if (first > second) {
-                    counts[0] = counts[0] + 1;
-                } else if (second > first) {
-                    counts[1] = counts[1] + 1;
-                }
-
                 if (first != second) count += 1;
-
-                for (int i = 2; i < scores.length; i++) {
-                    int third = Integer.parseInt(scores[i]);
-
-                    if (second < first && second < third) {
-                        counts[i] = counts[i - 1] + 1;
-                    }
-
-                    first = second;
-                    second = third;
-                }
 
                 System.out.println(count);
             }
