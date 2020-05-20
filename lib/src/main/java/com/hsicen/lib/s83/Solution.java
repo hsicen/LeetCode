@@ -26,6 +26,7 @@ public class Solution {
         System.out.println("Result：" + head);
     }
 
+    /*** 循环遍历链表去除重复结点*/
     public static ListNode deleteDuplicates(ListNode head) {
         if (null == head || null == head.next) return head;
         ListNode tmp = head;
@@ -39,6 +40,16 @@ public class Solution {
         return head;
     }
 
+    /*** 递归求解  递归寻找head的next结点*/
+    public static ListNode deleteDuplicates1(ListNode head) {
+        if (null == head || null == head.next) return head;
+
+        if (head.val == head.next.val) {
+            head = deleteDuplicates(head.next);
+        } else head.next = deleteDuplicates(head.next);
+
+        return head;
+    }
 
     static class ListNode {
         int val;
