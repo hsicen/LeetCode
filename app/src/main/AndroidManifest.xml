@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name=".singleTask.SingleTask2Activity"
+            android:taskAffinity="com.hsicen.single.task" />
+        <activity
+            android:name=".singleTask.SingleTask1Activity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.hsicen.single.task" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
