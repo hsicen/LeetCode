@@ -16,11 +16,22 @@ import java.util.List;
 public class Solution {
 
     public static void main(String[] args) {
+        TreeNode root = new TreeNode(3);
+        TreeNode left = new TreeNode(9);
+        TreeNode right = new TreeNode(20);
 
+        root.left = left;
+        root.right = right;
 
+        TreeNode secondLeft = new TreeNode(15);
+        TreeNode secondRight = new TreeNode(7);
+        right.left = secondLeft;
+        right.right = secondRight;
+
+        levelOrderBottom(root);
     }
 
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
         bfs(root, list, 0);
         Collections.reverse(list);
