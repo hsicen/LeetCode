@@ -20,9 +20,6 @@ class Solution {
         System.out.println("第四行：" + getRow(4));
         System.out.println("第五行：" + getRow(5));
         System.out.println("第五行：" + getRow(13));
-
-        System.out.println("阶乘：" + pow(13));
-        System.out.println("阶乘：" + pow(21));
     }
 
     /*** 利用二项式展开系数求解*/
@@ -36,20 +33,5 @@ class Solution {
         }
 
         return tmp;
-    }
-
-
-    /*** 计算a的阶乘*/
-    public static long pow(int a) {
-        if (a <= 1) return 1;
-        return a * pow(a - 1);
-    }
-
-    public static void getRow(ArrayList<Integer> data) {
-        for (int i = 1; i < data.size() - 1; i++) {
-            data.set(i, data.get(i) + data.get(i + 1));
-        }
-
-        data.add(1);
     }
 }
