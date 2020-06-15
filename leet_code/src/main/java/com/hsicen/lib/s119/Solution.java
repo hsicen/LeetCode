@@ -10,6 +10,8 @@ import java.util.List;
  * 描述： 杨辉三角 II
  * https://leetcode-cn.com/problems/pascals-triangle-ii/
  * 给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行。
+ * <p>
+ * 二项式展开定理：后一项 = 前一项 * (k-i)/(1+i)
  */
 class Solution {
 

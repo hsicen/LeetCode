@@ -16,25 +16,8 @@ class Solution {
     public static void moveZeroes(int[] nums) {
         if (null == nums || 1 == nums.length) return;
         int len = nums.length;
-        int count = 0;
 
-        for (int i = 0; i < len; i++) {
-            if (nums[i] == 0) {
-                count++;
-            } else {
-                if (count > 0) {
-                    for (int j = i; j < len - 1; j++) {
-                        nums[j - count] = nums[j];
-                    }
 
-                    for (int k = 0; k < count; k++) {
-                        nums[len - k - 1] = 0;
-                    }
 
-                    count = 0;
-                    i--;
-                }
-            }
-        }
     }
 }
