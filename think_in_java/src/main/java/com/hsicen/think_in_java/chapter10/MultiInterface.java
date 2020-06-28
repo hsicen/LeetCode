@@ -36,9 +36,17 @@ class MultiInterface {
             return new B() {
                 @Override
                 void b() {
-
+                    System.out.println("This is B.b()");
                 }
             };
         }
+    }
+
+    public static void main(String[] args) {
+        MultiInterface multiInterface = new MultiInterface();
+        TestIA testIA = multiInterface.new TestIA();
+
+        B b = testIA.getB();
+        b.b();
     }
 }
