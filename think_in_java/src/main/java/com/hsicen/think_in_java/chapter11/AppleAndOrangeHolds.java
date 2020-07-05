@@ -2,6 +2,7 @@ package com.hsicen.think_in_java.chapter11;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * 作者：hsicen  2020/6/27 21:55
@@ -22,6 +23,10 @@ class AppleAndOrangeHolds {
         for (Object apple : list) {
             System.out.println(((Apple) apple).id());
         }
+
+        ListIterator listIterator = list.listIterator();
+        listIterator.nextIndex();
+        listIterator.previousIndex();
 
 
         LinkedList<Apple> apples = new LinkedList<>();
