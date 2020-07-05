@@ -3,15 +3,23 @@ package com.hsicen.firstcode
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         Log.d("hsc", "MainActivity：onCreate()")
+    }
+
+    override fun setContentView() = R.layout.activity_main
+
+    override fun initVariable(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun initView() {
+        titleView.setTitle("首页")
 
         btn_main.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
@@ -21,6 +29,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SecondActivity::class.java))
 
         }
+    }
+
+    override fun initData() {
+
     }
 
     override fun onNewIntent(intent: Intent?) {
