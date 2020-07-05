@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.layout_common_title.view.*
 
 /**

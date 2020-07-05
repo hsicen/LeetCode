@@ -16,7 +16,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Log.d("BaseActivity", javaClass.simpleName)
-        supportActionBar?.hide()
         setContentView(setContentView())
         initVariable(savedInstanceState)
         initView()
