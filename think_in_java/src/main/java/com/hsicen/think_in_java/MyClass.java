@@ -12,7 +12,7 @@ public class MyClass {
         hashMap.put(null, "Hello");
         hashMap.put(null, "World");
 
-        hashtable.put("1","Hello");
+        hashtable.put("1", "Hello");
 
         System.out.println(hashMap.get(null));
         System.out.println(hashMap.get(null));
