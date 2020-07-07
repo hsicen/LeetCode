@@ -1,12 +1,20 @@
 package com.hsicen.firstcode
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    private val timeReceiver by lazy {
+        TimeBroadcastReceiver()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +41,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("android.intent.action.TIME_TICK")
+        registerReceiver(timeReceiver, intentFilter)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -47,5 +57,23 @@ class MainActivity : BaseActivity() {
         transaction.replace(R.id.titleView, fragment)
         transaction.addToBackStack(null) //添加到返回栈中进行管理
         transaction.commit()
+    }
+
+    private fun sendOrder() {
+        val intent = Intent("com.android.hsicen.broadcast.TEST_BROADCAST")
+        intent.setPackage(packageName) //指定广播发送的应用程序，从而变成一条显式广播
+        sendOrderedBroadcast(intent, null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        unregisterReceiver(timeReceiver)
+    }
+
+    inner class TimeBroadcastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Toast.makeText(context, "Time change", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -49,3 +49,8 @@ task B() {
         println getData()
     }
 }
+
+task copy(type: Copy) {
+    from('src')
+    into('dst')
+}
