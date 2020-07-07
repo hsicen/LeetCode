@@ -5,10 +5,11 @@ buildscript {
     repositories {
         maven { url "https://maven.google.com" }
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -20,6 +21,21 @@ allprojects {
     }
 }
 
+
+//配置app Module
+project('app') { Project project ->
+
+    //强制app Module使用某个版本的依赖库
+    project.configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:support-annotations:26.1.0'
+        }
+    }
+
+    apply plugin: 'com.android.application'
+}
+
+
 /*** 自定义方法*/
 static def getData() {
     def dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
@@ -28,6 +44,7 @@ static def getData() {
 }
 
 task clean(type: Delete) {
+
     delete rootProject.buildDir
 }
 
