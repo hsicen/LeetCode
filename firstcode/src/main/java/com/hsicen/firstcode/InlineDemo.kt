@@ -13,23 +13,34 @@ inline fun printStr(str: String, block: (String) -> Unit) {
     println("printStr end")
 }
 
-fun runRunnable(block: () -> Unit) {
+inline fun runRunnable(crossinline block: () -> Unit) {
+    println("runRunnable begin")
+
     val runnable = Runnable {
         block.invoke()
     }
 
     runnable.run()
+
+    println("runRunnable end")
 }
 
 
 fun main() {
     println("Main begin")
-    val str = ""
+    /*val str = ""
 
     printStr(str) {
         println("Lambda begin")
         if (it.isEmpty()) return@printStr
         println(it)
+        println("Lambda end")
+    }*/
+
+    val str = ""
+    runRunnable {
+        println("Lambda begin")
+        if (str.isEmpty()) return@runRunnable
         println("Lambda end")
     }
 
