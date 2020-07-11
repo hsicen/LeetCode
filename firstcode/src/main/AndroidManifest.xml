@@ -11,12 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name=".provider.BookProvider"
+            android:authorities="com.hsicen.book.provider"
+            android:enabled="true"
+            android:exported="true" />
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="100">
-                <!--通过action添加要监听的广播类型 可以添加多个-->
+
+                <!-- 通过action添加要监听的广播类型 可以添加多个 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

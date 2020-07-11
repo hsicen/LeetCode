@@ -1,12 +1,17 @@
 package com.hsicen.firstcode
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,6 +29,25 @@ class MainActivity : BaseActivity() {
     override fun setContentView() = R.layout.activity_main
 
     override fun initVariable(savedInstanceState: Bundle?) {
+        val money: Money? = Money(2)
+
+
+        val v = with(money) {
+            val newV = this!!.value.plus(10)
+            newV
+        }
+
+        val v2 = money?.let { vf ->
+            val i = vf.value + 20
+            "$i"
+        } ?: ""
+
+        val len = v2.length
+
+        money.run {
+
+        }
+
 
     }
 
@@ -69,7 +93,54 @@ class MainActivity : BaseActivity() {
         super.onDestroy()
 
         unregisterReceiver(timeReceiver)
+
+        contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null, null, null, null
+        )?.apply {
+            while (moveToNext()){
+                val name = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                val number = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+            }
+            close()
+        }
     }
+
+
+    private fun saveStr(str: String) {
+        openFileInput("")
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            //未授权  请求授权
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), 101)
+        } else {
+            //以授权 操作逻辑
+            Log.d("hsc", "以授权")
+        }
+    }
+
+    //权限申请结果回调
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            101 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //权限申请成功
+                    Log.d("hsc", "授权成功")
+                } else {
+                    Log.d("hsc", "授权失败")
+                }
+            }
+        }
+    }
+
 
     inner class TimeBroadcastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
