@@ -1,7 +1,5 @@
 package com.hsicen.firstcode
 
-import kotlin.contracts.contract
-
 /**
  * 作者：hsicen  2020/7/6 20:05
  * 邮箱：codinghuang@163.com

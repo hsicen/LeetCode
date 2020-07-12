@@ -2,7 +2,7 @@ package com.hsicen.firstcode.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
-import android.database.Cursor
+import android.content.UriMatcher
 import android.net.Uri
 
 /**
@@ -12,37 +12,96 @@ import android.net.Uri
  * 描述：自定义Provider向外提供数据
  */
 class BookProvider : ContentProvider() {
+    /**
+     * uri参数是ContentResolver调用增删改查传过来的，我们需要从这个参数解析出调用方希望访问的表和数据
+     * 如：
+     * content://com.hsicen.book.provider/table1  表示访问com.hsicen.book这个应用table1表中的数据
+     * content://com.hsicen.book.provider/table1  表示访问com.hsicen.book这个应用table1表中id=1的数据
+     *
+     * 以路径结尾表示期望访问该表中所有数据，以id结尾表示期望访问该表中拥有相应id的数据，我们可以使用通配符来分辨
+     * content://com.hsicen.book.provider/※
+     * content://com.hsicen.book.provider/table/#
+     *
+     * 同时我们也可以使用UriMatcher来实现匹配内容URI的功能
+     * addURI(authority, path, code)
+     * code = match(uri)
+     * addURI添加的code和match(uri)返回的code相同
+     */
+
+    private val bookDir = 0
+    private val bookItem = 1
+    private val categoryDir = 2
+    private val categoryItem = 3
+    private val authority = "com.hsicen.book.provider"
+    private val dbName = "BookStore.db"
+    private val dbVersion = 2
+
+    private val dbHelper by lazy {
+        context?.let {
+            BookStoreDatabaseHelper(it, dbName, dbVersion)
+        }
+    }
+    private val uriMatcher by lazy {
+        UriMatcher(UriMatcher.NO_MATCH).apply {
+            addURI(authority, "book", bookDir)
+            addURI(authority, "book/#", bookItem)
+            addURI(authority, "category", categoryDir)
+            addURI(authority, "category/#", categoryItem)
+        }
+    }
+
+    override fun onCreate() = dbHelper != null
+
+    override fun query(
+        uri: Uri, projection: Array<String>?,
+        selection: String?, selectionArgs: Array<String>?, sortOrder: String?
+    ) = dbHelper?.let {
+        val db = it.readableDatabase
+        when (uriMatcher.match(uri)) {
+            bookDir -> db.query(
+                "Book", projection, selection, selectionArgs,
+                null, null, sortOrder
+            )
+            bookItem -> db.query(
+                "Book", projection, "id = ?", arrayOf(uri.pathSegments[1]),
+                null, null, sortOrder
+            )
+
+            categoryDir -> db.query(
+                "Category", projection, selection, selectionArgs,
+                null, null, sortOrder
+            )
+
+            categoryItem -> db.query(
+                "Category", projection, "id = ?", arrayOf(uri.pathSegments[1]),
+                null, null, sortOrder
+            )
+
+            else -> null
+        }
+    }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         TODO("Implement this to handle requests to delete one or more rows")
-    }
-
-    override fun getType(uri: Uri): String? {
-        TODO(
-            "Implement this to handle requests for the MIME type of the data" +
-                    "at the given URI"
-        )
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         TODO("Implement this to handle requests to insert a new row.")
     }
 
-    override fun onCreate(): Boolean {
-        TODO("Implement this to initialize your content provider on startup.")
-    }
-
-    override fun query(
-        uri: Uri, projection: Array<String>?, selection: String?,
-        selectionArgs: Array<String>?, sortOrder: String?
-    ): Cursor? {
-        TODO("Implement this to handle query requests from clients.")
-    }
-
     override fun update(
-        uri: Uri, values: ContentValues?, selection: String?,
-        selectionArgs: Array<String>?
+        uri: Uri, values: ContentValues?,
+        selection: String?, selectionArgs: Array<String>?
     ): Int {
         TODO("Implement this to handle requests to update one or more rows.")
+    }
+
+    override fun getType(uri: Uri): String? {
+        //用于获取uri对象所对应的MIME类型  主要由3部分组成
+        //第一部分：以vnd开头
+        //第二部分：若URI以路径结尾：android.cursor.dir/; 若以id结尾：android.cursor.item/
+        //第三部分：最后接：vnd.<authority>.<path>
+
+
     }
 }
