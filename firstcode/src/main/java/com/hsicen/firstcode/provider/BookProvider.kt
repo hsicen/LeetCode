@@ -81,27 +81,62 @@ class BookProvider : ContentProvider() {
         }
     }
 
-    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        TODO("Implement this to handle requests to delete one or more rows")
-    }
+    override fun insert(uri: Uri, values: ContentValues?) = dbHelper?.let {
+        val db = it.readableDatabase
+        when (uriMatcher.match(uri)) {
+            bookDir, bookItem -> {
+                val id = db.insert("Book", null, values)
+                Uri.parse("content://$authority/book/$id")
+            }
 
-    override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        TODO("Implement this to handle requests to insert a new row.")
+            categoryDir, categoryItem -> {
+                val id = db.insert("Category", null, values)
+                Uri.parse("content://$authority/category/$id")
+            }
+
+            else -> null
+        }
     }
 
     override fun update(
         uri: Uri, values: ContentValues?,
         selection: String?, selectionArgs: Array<String>?
-    ): Int {
-        TODO("Implement this to handle requests to update one or more rows.")
-    }
+    ) = dbHelper?.let {
+        val db = it.readableDatabase
+        when (uriMatcher.match(uri)) {
+            bookDir -> db.update("Book", values, selection, selectionArgs)
+            bookItem -> db.update("Book", values, "id = ?", arrayOf(uri.pathSegments[1]))
+            categoryDir -> db.update("Category", values, selection, selectionArgs)
+            categoryItem -> db.update("Category", values, "id = ?", arrayOf(uri.pathSegments[1]))
+            else -> 0
+        }
+    } ?: 0
 
-    override fun getType(uri: Uri): String? {
-        //用于获取uri对象所对应的MIME类型  主要由3部分组成
-        //第一部分：以vnd开头
-        //第二部分：若URI以路径结尾：android.cursor.dir/; 若以id结尾：android.cursor.item/
-        //第三部分：最后接：vnd.<authority>.<path>
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?) =
+        dbHelper?.let {
+            val db = it.readableDatabase
+            when (uriMatcher.match(uri)) {
+                bookDir -> db.delete("Book", selection, selectionArgs)
+                bookItem -> db.delete("Book", "id = ?", arrayOf(uri.pathSegments[1]))
+                categoryDir -> db.delete("Category", selection, selectionArgs)
+                categoryItem -> db.delete("Category", "id = ?", arrayOf(uri.pathSegments[1]))
 
+                else -> 0
+            }
+        } ?: 0
 
+    /**
+     * 用于获取uri对象所对应的MIME类型  主要由3部分组成
+     * 第一部分：以vnd开头
+     * 第二部分：若URI以路径结尾：android.cursor.dir/; 若以id结尾：android.cursor.item/
+     * 第三部分：最后接：vnd.<authority>.<path>
+     */
+    override fun getType(uri: Uri) = when (uriMatcher.match(uri)) {
+        bookDir -> "vnd.android.cursor.dir/$authority.book"
+        bookItem -> "vnd.android.cursor.item/$authority.book"
+        categoryDir -> "vnd.android.cursor.dir/$authority.category"
+        categoryItem -> "vnd.android.cursor.item/$authority.category"
+
+        else -> null
     }
 }

@@ -21,6 +21,8 @@ inline fun runRunnable(crossinline block: () -> Unit) {
     }
 
     runnable.run()
+    runnable.run()
+    runnable.run()
 
     println("runRunnable end")
 }
