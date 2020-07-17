@@ -11,13 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".notifycation.NotifyActivity"></activity>
+        <activity android:name=".media.VideoPlayActivity"></activity>
+        <activity android:name=".media.MediaPlayActivity" />
+        <activity android:name=".picture.TakePictureActivity" />
+        <activity android:name=".notifycation.NotifyActivity" />
 
         <provider
             android:name=".provider.BookProvider"
             android:authorities="com.hsicen.book.provider"
             android:enabled="true"
             android:exported="true" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.hsicen.camera.test"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <receiver
             android:name=".BootReceiver"
