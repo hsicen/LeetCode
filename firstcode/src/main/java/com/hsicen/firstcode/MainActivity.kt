@@ -65,7 +65,10 @@ class MainActivity : BaseActivity() {
         }
 
         btn_service.setOnClickListener {
-            startActivity(Intent(this, ServiceActivity::class.java))
+            startActivity<ServiceActivity>(this) {
+                putExtra("msg", "Hello")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
         }
     }
 
