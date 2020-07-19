@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.hsicen.firstcode.service.ServiceActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -62,6 +63,10 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, SecondActivity::class.java))
 
         }
+
+        btn_service.setOnClickListener {
+            startActivity(Intent(this, ServiceActivity::class.java))
+        }
     }
 
     override fun initData() {
@@ -98,9 +103,11 @@ class MainActivity : BaseActivity() {
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null, null, null, null
         )?.apply {
-            while (moveToNext()){
-                val name = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val number = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+            while (moveToNext()) {
+                val name =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                val number =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
             }
             close()
         }
