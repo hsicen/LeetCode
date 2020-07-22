@@ -11,10 +11,62 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() {
+
+    runBlocking {
+        println("A" + Thread.currentThread().name)
+        val result = withContext(Dispatchers.Default) {
+            println("B" + Thread.currentThread().name)
+            delay(500)
+            10 + 5
+        }
+        println("C" + Thread.currentThread().name)
+        println("D $result " + Thread.currentThread().name)
+        println("E" + Thread.currentThread().name)
+    }
+}
+
+private fun test6() {
+    runBlocking {
+        println("A" + Thread.currentThread().name)
+
+        val result1 = async(Dispatchers.IO) {
+            delay(500)
+            println("B" + Thread.currentThread().name)
+            5 + 5
+        }
+
+        println("C" + Thread.currentThread().name)
+        val result2 = async(Dispatchers.IO) {
+            delay(500)
+            println("D" + Thread.currentThread().name)
+            4 + 3
+        }
+
+        println("E" + Thread.currentThread().name)
+        println(result1.await() + result2.await())
+        println("F" + Thread.currentThread().name)
+    }
+}
+
+private fun test5() {
+    val projectJob = Job()
+    val scope = CoroutineScope(projectJob)
+
+    println(Thread.currentThread().name)
+    scope.launch(Dispatchers.IO) {
+        println(Thread.currentThread().name)
+        println("A")
+    }
+
+    println("B")
+    projectJob.cancel()
+}
+
+private fun test4() {
     println(Thread.currentThread().name)
     runBlocking {
         println(Thread.currentThread().name)
-        coroutineScope {
+        coroutineScope() {
             println(Thread.currentThread().name)
             println("A")
             delay(500)
@@ -28,18 +80,21 @@ fun main() {
 }
 
 private fun test3() {
-    runBlocking {
+    println(Thread.currentThread().name)
+    runBlocking(Dispatchers.IO) {
+        println(Thread.currentThread().name)
         println("A")
         delay(500)
         println("B")
     }
 
+    println(Thread.currentThread().name)
     println("C")
 }
 
 private fun test2() {
     println(Thread.currentThread().name)
-    GlobalScope.launch {
+    GlobalScope.launch() {
         println(Thread.currentThread().name)
         println("B")
         delay(800)
@@ -58,7 +113,7 @@ private fun testOrder() {
     runBlocking {
         println("run: " + Thread.currentThread().name)
 
-        launch {
+        launch(Dispatchers.IO) {
             println("foo: " + Thread.currentThread().name)
             foo()
         }
