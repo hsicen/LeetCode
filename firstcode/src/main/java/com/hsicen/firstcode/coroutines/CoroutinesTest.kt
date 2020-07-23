@@ -1,6 +1,12 @@
 package com.hsicen.firstcode.coroutines
 
 import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.system.measureTimeMillis
 
 /**
@@ -12,6 +18,43 @@ import kotlin.system.measureTimeMillis
 
 fun main() {
 
+}
+
+suspend fun <T> Call<T>.await(): T {
+    return suspendCoroutine { sc ->
+        enqueue(object : Callback<T> {
+            override fun onFailure(call: Call<T>, t: Throwable) {
+                sc.resumeWithException(t)
+            }
+
+            override fun onResponse(call: Call<T>, response: Response<T>) {
+                response.body()?.let {
+                    sc.resume(it)
+                } ?: sc.resumeWithException(RuntimeException("response body is null"))
+            }
+        })
+    }
+}
+
+
+private fun test8() {
+    runBlocking(Dispatchers.IO) {
+        println("A" + Thread.currentThread().name)
+        val result = request("www.baidu.com")
+        println(result)
+        println("B" + Thread.currentThread().name)
+    }
+}
+
+
+suspend fun request(url: String): String {
+    return suspendCoroutine {
+        println("C" + Thread.currentThread().name)
+        it.resume("Hello")
+    }
+}
+
+private fun test7() {
     runBlocking {
         println("A" + Thread.currentThread().name)
         val result = withContext(Dispatchers.Default) {
