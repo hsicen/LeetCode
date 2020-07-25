@@ -3,6 +3,7 @@ package com.hsicen.firstcode
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.hsicen.firstcode.jetpack.LifeObserver
 
 /**
  * 作者：hsicen  2020/7/5 11:16
@@ -15,8 +16,10 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         Log.d("BaseActivity", javaClass.simpleName)
         setContentView(setContentView())
+        lifecycle.addObserver(LifeObserver(lifecycle))
         initVariable(savedInstanceState)
         initView()
     }
