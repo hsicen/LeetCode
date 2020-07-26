@@ -1,7 +1,6 @@
 package com.hsicen.firstcode.jetpack
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 
 /**
  * 作者：hsicen  2020/7/24 9:10
@@ -11,8 +10,28 @@ import androidx.lifecycle.ViewModelProvider
  */
 
 class CountViewModel(countSaved: Int) : ViewModel() {
+    private val _countNum = MutableLiveData<Int>()
+    private val _user = MutableLiveData<User>()
 
-    var countNum = countSaved
+    val countNum: LiveData<Int>
+        get() = _countNum
+
+    val userName: LiveData<String> = Transformations.map(_user) { user ->
+        user.name
+    }
+
+    init {
+        _countNum.value = countSaved
+    }
+
+    fun plusNum() {
+        val i = _countNum.value ?: 0
+        _countNum.value = i + 1
+    }
+
+    fun clear() {
+        _countNum.value = 0
+    }
 }
 
 

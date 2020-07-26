@@ -3,6 +3,7 @@ package com.hsicen.firstcode.jetpack
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hsicen.firstcode.R
 import kotlinx.android.synthetic.main.activity_view_model.*
@@ -24,23 +25,23 @@ class ViewModelActivity : AppCompatActivity() {
         setContentView(R.layout.activity_view_model)
 
         btn_count.setOnClickListener {
-            mViewModel.countNum++
-            refreshCount()
+            mViewModel.plusNum()
         }
 
-        refreshCount()
-    }
-
-    private fun refreshCount() {
-
-        tv_count.text = "${mViewModel.countNum}"
+        //数据监听
+        mViewModel.countNum.observe(this, Observer { num ->
+            tv_count.text = "$num"
+        })
+        mViewModel.userName.observe(this, Observer { name ->
+            println(name)
+        })
     }
 
     override fun onPause() {
         super.onPause()
 
         val edit = mSp.edit()
-        edit.putInt("sp_count", mViewModel.countNum)
+        edit.putInt("sp_count", mViewModel.countNum.value ?: 0)
         edit.apply()
     }
 }
