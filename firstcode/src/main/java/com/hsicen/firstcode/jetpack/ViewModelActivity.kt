@@ -37,6 +37,26 @@ class ViewModelActivity : AppCompatActivity() {
         })
     }
 
+    private fun userOperation() {
+        val userDao = AppDatabase.getDatabase(this).userDao()
+        val user1 = User("1", 1)
+        val user2 = User("2", 2)
+
+        //增
+        user1.id = userDao.insertUser(user1)
+        user2.id = userDao.insertUser(user2)
+
+        //删
+        userDao.deleteUser(user1)
+
+        //改
+        user2.name = "Tom"
+        userDao.updateUser(user2)
+
+        //查
+        userDao.loadAllUser()
+    }
+
     override fun onPause() {
         super.onPause()
 
