@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.work.*
 import com.hsicen.firstcode.R
 import kotlinx.android.synthetic.main.activity_view_model.*
+import java.util.concurrent.TimeUnit
 
 class ViewModelActivity : AppCompatActivity() {
 
@@ -63,5 +65,45 @@ class ViewModelActivity : AppCompatActivity() {
         val edit = mSp.edit()
         edit.putInt("sp_count", mViewModel.countNum.value ?: 0)
         edit.apply()
+    }
+
+    //配置后台任务，添加运行条件和约束信息
+    private fun addWork() {
+        val request = OneTimeWorkRequest.Builder(SimpleWork::class.java)
+            .setInitialDelay(5, TimeUnit.SECONDS)
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
+            .addTag("simple")
+            .build()
+
+        val repeatRequest =
+            PeriodicWorkRequest.Builder(SimpleWork::class.java, 15, TimeUnit.MINUTES)
+                .build()
+
+        //添加进任务栈
+        WorkManager.getInstance(this).enqueue(request)
+
+        WorkManager.getInstance(this).cancelAllWorkByTag("simple")
+        WorkManager.getInstance(this).cancelAllWork()
+
+        val workId = request.id
+        WorkManager.getInstance(this).cancelWorkById(workId)
+
+
+        WorkManager.getInstance(this)
+            .getWorkInfoByIdLiveData(workId)
+            .observe(this, Observer { workInfo ->
+                when (workInfo.state) {
+                    WorkInfo.State.SUCCEEDED -> {
+                    }
+                    WorkInfo.State.FAILED -> {
+                    }
+                }
+            })
+
+        WorkManager.getInstance(this)
+            .beginWith(request)
+            .then(request)
+            .then(request)
+            .enqueue()
     }
 }
