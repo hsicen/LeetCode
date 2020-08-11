@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.hsicen.firstcode.R
 import com.hsicen.firstcode.SecondActivity
@@ -48,7 +48,10 @@ class NotifyActivity : AppCompatActivity() {
             .setSmallIcon(R.mipmap.ic_launcher) //顶部状态栏显示的图表
             .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)) //通知栏显示的图表
             .setStyle(NotificationCompat.BigTextStyle().bigText("This is content text")) //可以完全显示
-            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))) //展示大图
+            .setStyle(
+                NotificationCompat.BigPictureStyle()
+                    .bigPicture(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
+            ) //展示大图
             .setContentIntent(pi)
             .setAutoCancel(true)  //点击后自动取消通知
             .build()
