@@ -1,4 +1,3 @@
-include ':firstcode'
-include ':app', ':core'
+include ':app'
+include ':core'
 include ':leet_code'
-include ':think_in_java'

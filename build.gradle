@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat
-
 buildscript {
     ext.kotlin_version = '1.3.72'
     repositories {
@@ -9,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.2.0-alpha07'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -21,53 +19,7 @@ allprojects {
     }
 }
 
-
-//配置app Module
-project('app') { Project project ->
-
-    //强制app Module使用某个版本的依赖库
-    project.configurations.all {
-        resolutionStrategy {
-            force 'com.android.support:support-annotations:26.1.0'
-        }
-    }
-
-    apply plugin: 'com.android.application'
-}
-
-
-/*** 自定义方法*/
-static def getData() {
-    def dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
-    def dateStr = "\"" + dateFormat.format(new Date()) + "\""
-    return dateStr
-}
-
 task clean(type: Delete) {
 
     delete rootProject.buildDir
-}
-
-task A() {
-    println 'Task A is config' //config 阶段执行
-
-    doFirst {
-        println 'Task A is executing' //execute阶段执行
-        println getData()
-    }
-}
-
-task B() {
-    dependsOn 'A'
-    println 'Task B is config'
-
-    doLast {
-        println 'Task B is executing'
-        println getData()
-    }
-}
-
-task copy(type: Copy) {
-    from('src')
-    into('dst')
 }
