@@ -1,7 +1,5 @@
 package com.hsicen.core.linklist;
 
-import com.night.leetcode.linkedlist.ReverseListKt;
-
 /**
  * <p>作者：Night  2019/2/1 16:23
  * <p>邮箱：codinghuang@163.com

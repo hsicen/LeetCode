@@ -1,12 +1,10 @@
-package com.night.leetcode.linkedlist
-
-import com.hsicen.core.linklist.ListNode
+package com.hsicen.core.linklist
 
 /**
- * <p>作者：Night  2019/2/1 14:33
- * <p>邮箱：codinghuang@163.com
- * <p>作用：
- * <p>描述：LeetCode
+ * 作者：Night  2019/2/1 14:33
+ * 邮箱：codinghuang@163.com
+ * 作用：
+ * 描述：LeetCode
  *
  * 翻转线性表
  */
