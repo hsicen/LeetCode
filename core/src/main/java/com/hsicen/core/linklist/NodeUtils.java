@@ -126,4 +126,10 @@ class NodeUtils {
         return slow;
     }
 
+    /*** 删除指定结点*/
+    static void deleteNode() {
+
+
+    }
+
 }

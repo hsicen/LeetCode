@@ -6,12 +6,12 @@ package com.hsicen.core.tree;
  * <p>作用：
  * <p>描述：二叉树结点
  */
-public class Node {
+public class TreeNode {
     int data;
-    Node left;
-    Node right;
+    TreeNode left;
+    TreeNode right;
 
-    public Node(int data) {
+    public TreeNode(int data) {
         this.data = data;
     }
 }

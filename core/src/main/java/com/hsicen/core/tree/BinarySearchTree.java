@@ -7,10 +7,10 @@ package com.hsicen.core.tree;
  * <p>描述：二叉搜索树
  */
 public class BinarySearchTree {
-    private Node tree;
+    private TreeNode tree;
 
-    public Node search(int data) {
-        Node p = this.tree;
+    public TreeNode search(int data) {
+        TreeNode p = this.tree;
 
         while (p != null) {
             if (data > p.data) p = p.right;
@@ -23,22 +23,22 @@ public class BinarySearchTree {
 
     public void insert(int data) {
         if (null == tree) {
-            tree = new Node(data);
+            tree = new TreeNode(data);
             return;
         }
 
-        Node p = this.tree;
+        TreeNode p = this.tree;
         while (true) {
             if (data > p.data) {
                 if (p.right == null) {
-                    p.right = new Node(data);
+                    p.right = new TreeNode(data);
                     return;
                 }
 
                 p = p.right;
             } else {
                 if (p.left == null) {
-                    p.left = new Node(data);
+                    p.left = new TreeNode(data);
                     return;
                 }
 
@@ -48,8 +48,8 @@ public class BinarySearchTree {
     }
 
     public void delete(int data) {
-        Node p = tree; // p指向要删除的节点，初始化指向根节点
-        Node pp = null; // pp记录的是p的父节点
+        TreeNode p = tree; // p指向要删除的节点，初始化指向根节点
+        TreeNode pp = null; // pp记录的是p的父节点
         while (p != null && p.data != data) {
             pp = p;
             if (data > p.data) p = p.right;
@@ -59,8 +59,8 @@ public class BinarySearchTree {
 
         // 要删除的节点有两个子节点
         if (p.left != null && p.right != null) { // 查找右子树中最小节点
-            Node minP = p.right;
-            Node minPP = p; // minPP表示minP的父节点
+            TreeNode minP = p.right;
+            TreeNode minPP = p; // minPP表示minP的父节点
             while (minP.left != null) {
                 minPP = minP;
                 minP = minP.left;
@@ -71,7 +71,7 @@ public class BinarySearchTree {
         }
 
         // 删除节点是叶子节点或者仅有一个子节点
-        Node child; // p的子节点
+        TreeNode child; // p的子节点
         if (p.left != null) child = p.left;
         else if (p.right != null) child = p.right;
         else child = null;

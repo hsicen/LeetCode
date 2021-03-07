@@ -42,12 +42,12 @@ public class SkipList {
     private int levelCount = 1;
 
     /*** 带头链表*/
-    private Node head = new Node(MAX_LEVEL);
+    private SNode head = new SNode(MAX_LEVEL);
     private Random r = new Random();
 
     /*** 查找结点*/
     public boolean search(int value) {
-        Node p = head;
+        SNode p = head;
         for (int i = levelCount - 1; i >= 0; --i) {
             while (p.forwards[i] != null && p.forwards[i].data < value) {
                 p = p.forwards[i];
@@ -62,15 +62,15 @@ public class SkipList {
         int level = head.forwards[0] == null ? 1 : randomLevel();
         if (level > levelCount) level = ++levelCount;
 
-        Node newNode = new Node(level);
-        newNode.data = value;
+        SNode newSNode = new SNode(level);
+        newSNode.data = value;
 
-        Node[] update = new Node[level];
+        SNode[] update = new SNode[level];
         for (int i = 0; i < level; i++) {
             update[i] = head;
         }
 
-        Node p = this.head;
+        SNode p = this.head;
         for (int i = levelCount - 1; i >= 0; i--) {
             while (p.forwards[i] != null && p.forwards[i].data < value) {
                 p = p.forwards[i];
@@ -80,8 +80,8 @@ public class SkipList {
         }
 
         for (int i = 0; i < level; i++) {
-            newNode.forwards[i] = update[i].forwards[i];
-            update[i].forwards[i] = newNode;
+            newSNode.forwards[i] = update[i].forwards[i];
+            update[i].forwards[i] = newSNode;
         }
     }
 
@@ -90,9 +90,9 @@ public class SkipList {
         int level = head.forwards[0] == null ? 1 : randomLevel();
         if (level > levelCount) level = ++levelCount;
 
-        Node newNode = new Node(level);
-        newNode.data = value;
-        Node p = head;
+        SNode newSNode = new SNode(level);
+        newSNode.data = value;
+        SNode p = head;
         for (int i = levelCount - 1; i >= 0; i--) {
             while (p.forwards[i] != null && p.forwards[i].data < value) {
                 p = p.forwards[i];
@@ -100,11 +100,11 @@ public class SkipList {
 
             if (level > i) {
                 if (p.forwards[i] == null)
-                    p.forwards[i] = newNode;
+                    p.forwards[i] = newSNode;
                 else {
-                    Node next = p.forwards[i];
-                    p.forwards[i] = newNode;
-                    newNode.forwards[i] = next;
+                    SNode next = p.forwards[i];
+                    p.forwards[i] = newSNode;
+                    newSNode.forwards[i] = next;
                 }
             }
         }
@@ -112,8 +112,8 @@ public class SkipList {
 
     /*** 删除结点*/
     public boolean erase(int num) {
-        Node[] update = new Node[levelCount];
-        Node p = head;
+        SNode[] update = new SNode[levelCount];
+        SNode p = head;
         for (int i = levelCount - 1; i >= 0; i--) {
             while (p.forwards[i] != null && p.forwards[i].data < num) {
                 p = p.forwards[i];
@@ -147,7 +147,7 @@ public class SkipList {
 
     /*** 数据打印*/
     public void printAll() {
-        Node p = this.head;
+        SNode p = this.head;
         while (p.forwards[0] != null) {
             System.out.print(p.forwards[0] + " > ");
             p = p.forwards[0];
@@ -160,9 +160,9 @@ public class SkipList {
     public void printAll2(String info) {
         System.out.println(info);
 
-        Node p = head;
-        Node[] c = p.forwards;
-        Node[] d = c;
+        SNode p = head;
+        SNode[] c = p.forwards;
+        SNode[] d = c;
         int maxLevel = c.length;
         for (int i = maxLevel - 1; i >= 0; i--) {
             do {
@@ -174,17 +174,17 @@ public class SkipList {
     }
 
     /*** 跳表的结点， 每个结点记录了当前结点数据和所在层数*/
-    public class Node {
+    public static class SNode {
         private int data = -1;
         private int maxLevel = 0;
 
         /***
          * 表示当前结点位置的下一个结点所有层的数据
          * forwards[3] 表示当前结点在第三层的下一个结点*/
-        private Node[] forwards;
+        private SNode[] forwards;
 
-        public Node(int level) {
-            forwards = new Node[level];
+        public SNode(int level) {
+            forwards = new SNode[level];
         }
 
         @NonNull
