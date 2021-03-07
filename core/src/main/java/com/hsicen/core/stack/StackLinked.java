@@ -1,7 +1,7 @@
 package com.hsicen.core.stack;
 
 
-import com.hsicen.core.linklist.ListNode;
+import com.hsicen.core.linklist.Node;
 
 /**
  * <p>作者：Night  2019/3/20 20:14
@@ -10,14 +10,14 @@ import com.hsicen.core.linklist.ListNode;
  * <p>描述：基于单链表的栈的实现
  */
 public class StackLinked {
-    private ListNode top = null;
+    private Node top = null;
     //当前栈中元素的个数
     private int count = 0;
 
 
     /*** 入栈操作(头插法)*/
     public void push(int item) {
-        ListNode newNode = new ListNode(item);
+        Node newNode = new Node(item);
 
         //第一个元素入栈
         if (top == null) {

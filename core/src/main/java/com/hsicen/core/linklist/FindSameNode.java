@@ -17,11 +17,11 @@ public class FindSameNode {
      * @param headB headB
      * @return 相同结点
      */
-    public static ListNode getNode(ListNode headA, ListNode headB) {
+    public static Node getNode(Node headA, Node headB) {
         if (headA == null || headB == null) return null;
 
-        ListNode a = headA;
-        ListNode b = headB;
+        Node a = headA;
+        Node b = headB;
         while (a != b) {
             a = a == null ? headB : a.next;
             b = b == null ? headA : b.next;

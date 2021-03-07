@@ -9,9 +9,9 @@ package com.hsicen.core.linklist
  * 翻转线性表
  */
 
-fun Reverse(head: ListNode?): ListNode? {
+fun Reverse(head: Node?): Node? {
     var temp = head
-    var newHead: ListNode? = null
+    var newHead: Node? = null
 
     while (temp != null) {
         val next = temp.next

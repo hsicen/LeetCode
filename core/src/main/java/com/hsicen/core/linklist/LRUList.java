@@ -10,7 +10,7 @@ public class LRUList {
     /** 缓存的大小 */
     private int size = 10;
     /** 单链表缓存维护 */
-    private ListNode cache;
+    private Node cache;
     /** 当前缓存容量 */
     private int length = 0;
 
@@ -22,7 +22,7 @@ public class LRUList {
     public void add(int data) {
         //链表为空
         if (cache == null) {
-            cache = new ListNode(data);
+            cache = new Node(data);
             return;
         }
 
@@ -71,7 +71,7 @@ public class LRUList {
 
     /** 使用头插法插入节点 */
     private void insert(int data) {
-        ListNode newNode = new ListNode(data);
+        Node newNode = new Node(data);
         newNode.next = cache;
         length++;
     }

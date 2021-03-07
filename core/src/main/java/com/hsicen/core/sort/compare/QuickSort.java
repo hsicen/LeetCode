@@ -23,8 +23,6 @@ import java.util.Arrays;
  * <p>
  * 随机法选择轴点
  * 思路：从排序区间随机选择一个数作为该区间的轴点
- *
- *
  */
 public class QuickSort {
 

@@ -1,4 +1,4 @@
-package com.night.leetcode.stack
+package com.hsicen.core.stack
 
 import java.util.*
 

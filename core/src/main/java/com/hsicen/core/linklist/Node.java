@@ -8,13 +8,13 @@ package com.hsicen.core.linklist;
  * <p>
  * 单链表定义
  */
-public class ListNode {
+public class Node {
     /*** 结点值*/
     public int val;
     /*** 下一个结点*/
-    public ListNode next = null;
+    public Node next = null;
 
-    public ListNode(int data) {
+    public Node(int data) {
         this.val = data;
     }
 }

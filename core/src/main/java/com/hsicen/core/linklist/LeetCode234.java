@@ -16,21 +16,21 @@ import java.util.Stack;
  */
 public class LeetCode234 {
 
-    public boolean isPalindrome(ListNode head) {
+    public boolean isPalindrome(Node head) {
         //判断链表是否为空或者只有一个结点值
         if (head == null || head.next == null) {
             return true;
         }
 
-        ListNode fast = head;
-        ListNode slow = head;
-        ListNode prev = null;
+        Node fast = head;
+        Node slow = head;
+        Node prev = null;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
 
             //暂存下一个结点值
-            ListNode next = slow.next;
+            Node next = slow.next;
 
             //反转慢指针
             slow.next = prev;
@@ -66,9 +66,9 @@ public class LeetCode234 {
      *         字符串数据
      * @return 结果
      */
-    public boolean isPalindromeStack(ListNode head) {
+    public boolean isPalindromeStack(Node head) {
         Stack<Integer> s = new Stack<>();
-        ListNode cur = head;
+        Node cur = head;
 
         while (cur != null) {
             s.add(cur.val);

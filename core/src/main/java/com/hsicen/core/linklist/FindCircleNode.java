@@ -11,9 +11,9 @@ package com.hsicen.core.linklist;
 public class FindCircleNode {
 
 
-    public static ListNode findCircleNode(ListNode head) {
-        ListNode fast = head, slow = head;
-        ListNode meet = null;
+    public static Node findCircleNode(Node head) {
+        Node fast = head, slow = head;
+        Node meet = null;
 
         while (fast != null) {
             slow = slow.next;
@@ -45,13 +45,13 @@ public class FindCircleNode {
         return null;
     }
 
-    public static boolean hasCircleNode(ListNode head) {
+    public static boolean hasCircleNode(Node head) {
         if (head == null) {
             return false;
         }
 
-        ListNode fast = head;
-        ListNode slow = head;
+        Node fast = head;
+        Node slow = head;
 
         while ((slow = slow.next) != null) {
             if (fast == null || fast.next == null) {
@@ -67,7 +67,7 @@ public class FindCircleNode {
         return false;
     }
 
-    public static ListNode mergeList(ListNode l1, ListNode l2) {
+    public static Node mergeList(Node l1, Node l2) {
         if (l1 == null) {
             return l2;
         }
@@ -92,12 +92,12 @@ public class FindCircleNode {
      * @param l2 l2
      * @return 合并后的链表
      */
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public static Node mergeTwoLists(Node l1, Node l2) {
         if (l1 == null || l2 == null) {
             return l2 == null ? l1 : l2;
         }
 
-        ListNode first = (l2.val < l1.val) ? l2 : l1;
+        Node first = (l2.val < l1.val) ? l2 : l1;
         first.next = mergeTwoLists(first.next, first == l1 ? l2 : l1);
         return first;
     }

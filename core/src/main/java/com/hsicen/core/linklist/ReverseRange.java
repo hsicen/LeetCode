@@ -19,21 +19,21 @@ public class ReverseRange {
      * @param n    end
      * @return ListNode
      */
-    public static ListNode Reverse(ListNode head, int m, int n) {
+    public static Node Reverse(Node head, int m, int n) {
         int changeLen = n - m + 1;
-        ListNode preHead = null;
-        ListNode result = head;
+        Node preHead = null;
+        Node result = head;
 
         while (head != null && --m > 0) {
             preHead = head;
             head = head.next;
         }
 
-        ListNode modifyListTail = head;
-        ListNode newHead = null;
+        Node modifyListTail = head;
+        Node newHead = null;
 
         while (head != null && changeLen > 0) {
-            ListNode next = head.next;
+            Node next = head.next;
             head.next = newHead;
             newHead = head;
             head = next;

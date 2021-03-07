@@ -10,11 +10,11 @@ package com.hsicen.core.linklist;
  */
 public class ReverseListJava {
 
-    public ListNode Reverse(ListNode head) {
-        ListNode newHead = null;
+    public Node Reverse(Node head) {
+        Node newHead = null;
 
         while (head != null) {
-            ListNode next = head.next;
+            Node next = head.next;
             head.next = newHead;
             newHead = head;
             head = next;

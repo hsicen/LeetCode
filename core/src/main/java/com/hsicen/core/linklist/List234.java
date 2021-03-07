@@ -16,19 +16,19 @@ public class List234 {
      * @param head 表头
      * @return 是否为回文链表
      */
-    public boolean isPalindrome(ListNode head) {
+    public boolean isPalindrome(Node head) {
         //边界条件判定
         if (head == null || head.next == null) return true;
 
-        ListNode fast = head;
-        ListNode slow = fast;
-        ListNode pre = null;
+        Node fast = head;
+        Node slow = fast;
+        Node pre = null;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
 
             //反转慢链表
-            ListNode next = slow.next;
+            Node next = slow.next;
             slow.next = pre;
             pre = slow;
             slow = next;
@@ -54,13 +54,13 @@ public class List234 {
      * @param head 表头
      * @return 是否为回文链表
      */
-    public boolean isPalindrome1(ListNode head) {
+    public boolean isPalindrome1(Node head) {
         if (head == null || head.next == null) return true;
 
-        ListNode fast = head;
-        ListNode slow = head;
+        Node fast = head;
+        Node slow = head;
 
-        Stack<ListNode> halfNode = new Stack<>();
+        Stack<Node> halfNode = new Stack<>();
 
         //找到中间结点，前半部分入栈
         while (fast != null && fast.next != null) {

@@ -1,7 +1,7 @@
 package com.hsicen.core.queue;
 
 
-import com.hsicen.core.linklist.ListNode;
+import com.hsicen.core.linklist.Node;
 
 /**
  * <p>作者：Night  2019/3/22 17:02
@@ -11,13 +11,13 @@ import com.hsicen.core.linklist.ListNode;
  */
 public class LinkedQueue {
     //队头(出队)
-    private ListNode head;
+    private Node head;
     //队尾(入队)
-    private ListNode tail;
+    private Node tail;
 
     /*** 入队操作*/
     public void enQueue(int data) {
-        ListNode node = new ListNode(data);
+        Node node = new Node(data);
 
         //队空判断
         if (tail == null) {
@@ -41,7 +41,7 @@ public class LinkedQueue {
     }
 
     public void paintAll() {
-        ListNode p = this.head;
+        Node p = this.head;
 
         while (p != null) {
             System.out.println(p.val);

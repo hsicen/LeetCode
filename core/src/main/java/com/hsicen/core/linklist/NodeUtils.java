@@ -8,25 +8,25 @@ package com.hsicen.core.linklist;
  * <p>
  * 链表工具类
  */
-class Utils {
+class NodeUtils {
 
     /*** 打印链表*/
-    static void printList(ListNode listNode) {
+    static void printList(Node node) {
         System.out.println("开始打印： ");
-        while (listNode != null) {
-            System.out.print("->" + listNode.val);
-            listNode = listNode.next;
+        while (node != null) {
+            System.out.print("->" + node.val);
+            node = node.next;
         }
 
         System.out.println("\n结束打印");
     }
 
     /*** 反转线性表*/
-    static ListNode reverse(ListNode head) {
-        ListNode newHead = null;
+    static Node reverse(Node head) {
+        Node newHead = null;
 
         while (head != null) {
-            ListNode next = head.next;
+            Node next = head.next;
             head.next = newHead;
             newHead = head;
             head = next;
@@ -36,12 +36,12 @@ class Utils {
     }
 
     /*** 检测链表是否有环*/
-    static boolean checkCircle(ListNode head) {
+    static boolean checkCircle(Node head) {
         if (head == null) return false;
 
         //利用快慢指针
-        ListNode fast = head;
-        ListNode slow = head;
+        Node fast = head;
+        Node slow = head;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
@@ -54,18 +54,18 @@ class Utils {
     }
 
     /*** 两个有序单链表的合并*/
-    static ListNode mergeList(ListNode la, ListNode lb) {
+    static Node mergeList(Node la, Node lb) {
         //边界条件检测
         if (la == null) return lb;
         if (lb == null) return la;
 
-        ListNode newNode = null;
+        Node newNode = null;
 
         if (la.val < lb.val) {
-            newNode = new ListNode(la.val);
+            newNode = new Node(la.val);
             la = la.next;
         } else {
-            newNode = new ListNode(lb.val);
+            newNode = new Node(lb.val);
             lb = lb.next;
         }
 
@@ -74,7 +74,7 @@ class Utils {
                 newNode.next = la;
                 la = la.next;
             } else {
-                newNode = new ListNode(lb.val);
+                newNode = new Node(lb.val);
                 newNode.next = lb;
             }
         }
@@ -86,9 +86,9 @@ class Utils {
     }
 
     /*** 删除链表倒数第n个结点*/
-    static ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode fast = head;
-        ListNode slow = head;
+    static Node removeNthFromEnd(Node head, int n) {
+        Node fast = head;
+        Node slow = head;
 
         //先向前移动index个间隔
         for (int i = 0; i < n; i++) {
@@ -110,13 +110,13 @@ class Utils {
     }
 
     /*** 寻找链表的中间结点*/
-    static ListNode findMiddle(ListNode head) {
+    static Node findMiddle(Node head) {
         //检测边界条件
         if (head == null) return null;
 
         //利用快慢指针寻找中间结点
-        ListNode fast = head;
-        ListNode slow = head;
+        Node fast = head;
+        Node slow = head;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;

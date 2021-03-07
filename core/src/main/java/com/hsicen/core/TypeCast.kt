@@ -1,7 +1,5 @@
 package com.hsicen.core
 
-import org.jetbrains.annotations.TestOnly
-
 /**
  * 作者：hsicen  2020/8/18 15:15
  * 邮箱：codinghuang@163.com
