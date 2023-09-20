@@ -1,6 +1,7 @@
 package com.hsicen.core.skiplist;
 
-import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -187,7 +188,7 @@ public class SkipList {
             forwards = new SNode[level];
         }
 
-        @NonNull
+        @NotNull
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
