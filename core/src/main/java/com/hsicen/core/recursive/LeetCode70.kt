@@ -19,7 +19,7 @@ package com.hsicen.core.recursive
  * Note: Given n will be a positive integer.
  */
 
-fun main(args: Array<String>) {
+fun main() {
 
 }
 

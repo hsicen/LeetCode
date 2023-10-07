@@ -9,7 +9,7 @@ package com.hsicen.core.string
  * LeetCode第五题
  */
 
-fun main(args: Array<String>) {
+fun main() {
 
     val str = "12111"
     println("$str  的最长回文子串为：${longestPalindrome(str)}")
