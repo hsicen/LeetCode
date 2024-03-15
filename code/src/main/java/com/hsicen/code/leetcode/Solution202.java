@@ -47,11 +47,12 @@ public class Solution202 {
         return fast == 1;
     }
 
+    // 获取每一位的平方和
     private int getNext(int number) {
         int totalSum = 0;
         while (number > 0) {
-            int digit = number % 10;
-            number /= 10;
+            int digit = number % 10; // 取余
+            number /= 10; // 取模
             totalSum += digit * digit;
         }
         return totalSum;
