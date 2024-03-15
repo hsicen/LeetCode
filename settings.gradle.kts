@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "LeetCode"
 include(":app")
-include(":core")
+include(":code")

@@ -11,6 +11,7 @@ appcompat = "1.6.1"
 material = "1.9.0"
 constraintlayout = "2.1.4"
 lifecycle = "2.6.2"
+jetbrainsKotlinJvm = "1.9.0"
 
 
 [libraries]
@@ -36,6 +37,7 @@ lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 
 [bundles]
