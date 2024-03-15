@@ -1,4 +1,4 @@
-package com.hsicen.core.queue;
+package com.hsicen.code.queue;
 
 /**
  * <p>作者：Night  2019/3/22 17:35

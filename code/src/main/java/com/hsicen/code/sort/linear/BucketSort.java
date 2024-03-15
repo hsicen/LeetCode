@@ -1,4 +1,4 @@
-package com.hsicen.core.sort.linear;
+package com.hsicen.code.sort.linear;
 
 /**
  * <p>作者：Hsicen  2019/9/12 16:49

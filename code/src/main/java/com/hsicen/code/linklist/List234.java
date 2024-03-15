@@ -1,4 +1,4 @@
-package com.hsicen.core.linklist;
+package com.hsicen.code.linklist;
 
 import java.util.Stack;
 

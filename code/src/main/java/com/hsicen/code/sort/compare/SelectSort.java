@@ -1,4 +1,4 @@
-package com.hsicen.core.sort.compare;
+package com.hsicen.code.sort.compare;
 
 import java.util.Arrays;
 

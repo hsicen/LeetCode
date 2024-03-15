@@ -1,6 +1,6 @@
-package com.hsicen.core;
+package com.hsicen.code;
 
-import com.hsicen.core.singleton.EnumTon;
+import com.hsicen.code.singleton.EnumTon;
 
 /**
  * <p>作者：hsicen  2019/12/3 8:28

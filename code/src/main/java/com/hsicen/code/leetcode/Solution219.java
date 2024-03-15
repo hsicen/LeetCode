@@ -1,4 +1,4 @@
-package com.hsicen.core.leetcode;
+package com.hsicen.code.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;

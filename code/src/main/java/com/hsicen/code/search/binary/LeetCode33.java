@@ -1,4 +1,4 @@
-package com.hsicen.core.search.binary;
+package com.hsicen.code.search.binary;
 
 /**
  * <p>作者：hsicen  2019/11/26 16:54

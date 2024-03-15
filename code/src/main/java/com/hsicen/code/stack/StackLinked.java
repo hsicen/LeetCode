@@ -1,7 +1,7 @@
-package com.hsicen.core.stack;
+package com.hsicen.code.stack;
 
 
-import com.hsicen.core.linklist.Node;
+import com.hsicen.code.linklist.Node;
 
 /**
  * <p>作者：Night  2019/3/20 20:14

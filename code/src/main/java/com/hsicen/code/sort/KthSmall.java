@@ -1,4 +1,4 @@
-package com.hsicen.core.sort;
+package com.hsicen.code.sort;
 
 import java.util.Arrays;
 import java.util.Random;

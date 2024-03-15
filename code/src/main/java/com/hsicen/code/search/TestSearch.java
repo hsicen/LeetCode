@@ -1,4 +1,4 @@
-package com.hsicen.core.search;
+package com.hsicen.code.search;
 
 /**
  * <p>作者：Hsicen  2019/9/27 16:20

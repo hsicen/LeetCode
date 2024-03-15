@@ -1,4 +1,4 @@
-package com.hsicen.core.leetcode;
+package com.hsicen.code.leetcode;
 
 /**
  * @author: hsicen

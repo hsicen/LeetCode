@@ -1,4 +1,4 @@
-package com.hsicen.core.skiplist;
+package com.hsicen.code.skiplist;
 
 
 import org.jetbrains.annotations.NotNull;

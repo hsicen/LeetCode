@@ -1,4 +1,4 @@
-package com.hsicen.core.stack
+package com.hsicen.code.stack
 
 import java.util.LinkedList
 

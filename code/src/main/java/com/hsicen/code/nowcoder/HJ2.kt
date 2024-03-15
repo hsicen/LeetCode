@@ -1,4 +1,4 @@
-package com.hsicen.core.nowcoder
+package com.hsicen.code.nowcoder
 
 import java.util.Scanner
 

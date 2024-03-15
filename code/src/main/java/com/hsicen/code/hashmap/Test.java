@@ -1,4 +1,4 @@
-package com.hsicen.core.hashmap;
+package com.hsicen.code.hashmap;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.hsicen.core.string;
+package com.hsicen.code.string;
 
 /**
  * <p>作者：Hsicen  2019/8/26 21:54

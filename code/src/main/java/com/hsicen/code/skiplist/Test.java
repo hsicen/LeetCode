@@ -1,4 +1,4 @@
-package com.hsicen.core.skiplist;
+package com.hsicen.code.skiplist;
 
 /**
  * <p>作者：hsicen  2019/11/27 16:46

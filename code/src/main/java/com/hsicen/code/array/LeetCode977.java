@@ -1,4 +1,4 @@
-package com.hsicen.core.array;
+package com.hsicen.code.array;
 
 /**
  * <p>作者：Hsicen  2019/8/23 9:07

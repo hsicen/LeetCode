@@ -1,4 +1,4 @@
-package com.hsicen.core.linklist;
+package com.hsicen.code.linklist;
 
 /**
  * <p>作者：Night  2019/2/1 16:24

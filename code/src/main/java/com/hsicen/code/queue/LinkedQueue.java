@@ -1,7 +1,7 @@
-package com.hsicen.core.queue;
+package com.hsicen.code.queue;
 
 
-import com.hsicen.core.linklist.Node;
+import com.hsicen.code.linklist.Node;
 
 /**
  * <p>作者：Night  2019/3/22 17:02

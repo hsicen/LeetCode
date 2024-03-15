@@ -1,4 +1,4 @@
-package com.hsicen.core.singleton;
+package com.hsicen.code.singleton;
 
 /**
  * 作者：hsicen  2020/5/19 9:00

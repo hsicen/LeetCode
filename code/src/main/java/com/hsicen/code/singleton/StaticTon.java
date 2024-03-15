@@ -1,4 +1,4 @@
-package com.hsicen.core.singleton;
+package com.hsicen.code.singleton;
 
 import java.io.Serializable;
 

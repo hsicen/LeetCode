@@ -1,4 +1,4 @@
-package com.hsicen.core.array;
+package com.hsicen.code.array;
 
 
 import static java.sql.DriverManager.println;

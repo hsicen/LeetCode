@@ -1,4 +1,4 @@
-package com.hsicen.core.array;
+package com.hsicen.code.array;
 
 import java.util.Arrays;
 

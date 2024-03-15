@@ -1,4 +1,4 @@
-package com.hsicen.core.leetcode;
+package com.hsicen.code.leetcode;
 
 /**
  * 作者：hsicen  2020/8/19 8:30
