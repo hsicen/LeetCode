@@ -20,7 +20,9 @@ package com.hsicen.code.recursive
  */
 
 fun main() {
-
+    println(climbStairs(2))
+    println(climbStairs(3))
+    println(climbStairs(4))
 }
 
 fun climbStairs(n: Int): Int {
