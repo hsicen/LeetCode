@@ -52,7 +52,7 @@ class Solution69 {
         if (0 == a || 1 == a) return a
 
         var x = a.toDouble()
-        var eps = 1e-2
+        var eps = 1e-1
         while (abs(x - a / x) >= eps) {
             x = (x + a / x) / 2
             println("当前：a=$a  x=$x eps=$eps")
