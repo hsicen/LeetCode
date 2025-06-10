@@ -1,5 +1,7 @@
 package com.hsicen.code.array
 
+import kotlin.math.abs
+
 /**
  * @author: hsc
  * @date: 2025/6/8 20:48
@@ -21,7 +23,7 @@ package com.hsicen.code.array
  * 解释：8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
  */
 class Solution69 {
-    // 使用二分法处理，假设区间在[1,x]，找到第一个 left<=right 且 小于等于x/mid的数，然后返回left-1
+    //使用二分法处理，假设区间在[1,x]，找到第一个 left<=right 且 小于等于x/mid的数，然后返回left-1
     fun mySqrt(x: Int): Int {
         if (x == 0 || x == 1) return x
 
@@ -40,7 +42,24 @@ class Solution69 {
         return right
     }
 
+    //使用牛顿迭代法处理：
+    // 令 f(x) = x^2 - target，
+    // 则 x = x - f(x)/f'(x)
+    //      = x - (x^2 - target)/(2x)
+    //      = x - (x - target/x)/2
+    //      = x/2 + target/2x
+    fun mySqrt2(a: Int): Int {
+        if (0 == a || 1 == a) return a
 
+        var x = a.toDouble()
+        var eps = 1e-2
+        while (abs(x - a / x) >= eps) {
+            x = (x + a / x) / 2
+            println("当前：a=$a  x=$x eps=$eps")
+        }
+
+        return x.toInt()
+    }
 }
 
 fun main() {
@@ -58,14 +77,14 @@ fun main() {
     println("$target4 的平方根是：${solution.mySqrt(target4)}")
 
     val target5 = 2
-    println("$target5 的平方根是：${solution.mySqrt(target5)}")
+    println("$target5 的平方根是：${solution.mySqrt2(target5)}")
 
     val target6 = 3
-    println("$target6 的平方根是：${solution.mySqrt(target6)}")
+    println("$target6 的平方根是：${solution.mySqrt2(target6)}")
 
     val target7 = 9
-    println("$target7 的平方根是：${solution.mySqrt(target7)}")
+    println("$target7 的平方根是：${solution.mySqrt2(target7)}")
 
     val target8 = 70
-    println("$target8 的平方根是：${solution.mySqrt(target8)}")
+    println("$target8 的平方根是：${solution.mySqrt2(target8)}")
 }
