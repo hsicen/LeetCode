@@ -52,8 +52,8 @@ class Solution69 {
         if (0 == a || 1 == a) return a
 
         var x = a.toDouble()
-        var eps = 1e-1
-        while (abs(x - a / x) >= eps) {
+        var eps = 1e-10
+        while (abs(x - a / x) > eps) {
             x = (x + a / x) / 2
             println("当前：a=$a  x=$x eps=$eps")
         }
@@ -85,6 +85,6 @@ fun main() {
     val target7 = 9
     println("$target7 的平方根是：${solution.mySqrt2(target7)}")
 
-    val target8 = 70
+    val target8 = 2147395599
     println("$target8 的平方根是：${solution.mySqrt2(target8)}")
 }
