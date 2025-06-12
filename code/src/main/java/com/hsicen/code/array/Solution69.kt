@@ -23,7 +23,7 @@ import kotlin.math.abs
  * 解释：8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
  */
 class Solution69 {
-    //使用二分法处理，假设区间在[1,x]，找到第一个 left<=right 且 小于等于x/mid的数，然后返回left-1
+    //使用二分法处理，假设区间在[1,x]，找到第一个 left<=right 且 小于等于x/mid的数，然后返回left-1/right
     fun mySqrt(x: Int): Int {
         if (x == 0 || x == 1) return x
 
