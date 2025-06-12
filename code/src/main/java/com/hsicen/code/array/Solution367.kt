@@ -67,7 +67,7 @@ class Solution367 {
         }
     }
 
-    // 二项式定理求解
+    // 二项式展开定理求解  n^2 = 1 + 3 + 5 + 7 + ... + (2n - 1)
     fun isPerfectSquare4(num: Int): Boolean {
         var step = 1
         var remain = num
