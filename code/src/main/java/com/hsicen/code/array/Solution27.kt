@@ -21,13 +21,13 @@ package com.hsicen.code.array
 class Solution27 {
     // 使用快慢指针求解
     fun removeElement(nums: IntArray, val1: Int): Int {
-        var count = 0
-        for (i in nums.indices) {
-            if (nums[i] != val1) {
-                nums[count++] = nums[i]
+        var slowIndex = 0
+        for (fastIndex in nums.indices) {
+            if (nums[fastIndex] != val1) {
+                nums[slowIndex++] = nums[fastIndex]
             }
         }
-        return count
+        return slowIndex
     }
 }
 
@@ -35,11 +35,13 @@ fun main() {
     val solution27 = Solution27()
     val nums = intArrayOf(3, 2, 2, 3)
     val val1 = 3
+    print("数组 [${nums.joinToString()}] 移除元素 $val1 ")
     val count = solution27.removeElement(nums, val1)
-    println("数组 [${nums.joinToString()}] 移除元素 $val1 后的数组长度为 $count")
+    println("后的数组长度为 $count\n")
 
     val nums2 = intArrayOf(0, 1, 2, 2, 3, 0, 4, 2)
     val val2 = 2
+    print("数组 [${nums2.joinToString()}] 移除元素 $val2 ")
     val count2 = solution27.removeElement(nums2, val2)
-    println("数组 [${nums2.joinToString()}] 移除元素 $val2 后的数组长度为 $count2")
+    println("后的数组长度为 $count2\n")
 }

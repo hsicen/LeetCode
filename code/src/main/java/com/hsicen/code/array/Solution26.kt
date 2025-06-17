@@ -24,27 +24,26 @@ package com.hsicen.code.array
  */
 class Solution26 {
     fun removeDuplicates(nums: IntArray): Int {
-        var index = 0
-        for (i in 0 until nums.size) {
-            if (nums[i] != nums[index]) {
-                index++
-                nums[index] = nums[i]
+        var slowIndex = 0
+        for (fastIndex in nums.indices) {
+            if (nums[fastIndex] != nums[slowIndex]) {
+                nums[++slowIndex] = nums[fastIndex]
             }
         }
 
-        return index + 1
+        return slowIndex + 1
     }
 }
 
 fun main() {
     val solution26 = Solution26()
     var nums = intArrayOf(1, 1, 2)
-    val newSize = solution26.removeDuplicates(nums)
-    println("newSize = $newSize")
     println("nums = ${nums.toList()}")
+    val newSize = solution26.removeDuplicates(nums)
+    println("newSize = $newSize  nums = ${nums.toList()} \n")
 
     nums = intArrayOf(0, 0, 1, 1, 1, 2, 2, 3, 3, 4)
-    val newSize2 = solution26.removeDuplicates(nums)
-    println("newSize2 = $newSize2")
     println("nums = ${nums.toList()}")
+    val newSize2 = solution26.removeDuplicates(nums)
+    println("newSize2 = $newSize2  nums = ${nums.toList()}")
 }
