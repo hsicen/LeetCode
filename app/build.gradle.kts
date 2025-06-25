@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -6,21 +5,12 @@ plugins {
 
 android {
     namespace = "com.hsicen.leetcode"
-    compileSdk = libs.versions
-        .compileSdk
-        .get()
-        .toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.hsicen.leetcode"
-        minSdk = libs.versions
-            .minSdk
-            .get()
-            .toInt()
-        targetSdk = libs.versions
-            .targetSdk
-            .get()
-            .toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
 
         versionCode = 1
         versionName = "1.0"
