@@ -32,64 +32,38 @@ package com.hsicen.code.array
 class Solution76 {
 
     fun minWindow(s: String, t: String): String {
-        fun checkContain(sMap: HashMap<Char, Int>, tMap: HashMap<Char, Int>): Boolean {
-            if (tMap.size > sMap.size) return false
-            for ((tKey, tVal) in tMap) {
-                val sVal = sMap[tKey] ?: 0
-                if (sVal < tVal) {
-                    return false
-                }
-            }
+        if (s.isEmpty() || t.isEmpty() || s.length < t.length) return ""
 
-            return true
+        val counts = IntArray(128)
+        var keys = 0
+
+        t.forEach { c ->
+            if (counts[c.code] == 0) keys++
+            counts[c.code]++
         }
 
-        if (s.isEmpty() || t.isEmpty()) return ""
+        var left = 0
+        var minLen = Int.MAX_VALUE
+        var start = 0
 
-        // 记录符合要求的字串起始和结束位置
-        var endIndex = -1
-        var startIndex = 0
-        var slowIndex = 0
+        for (right in s.indices) {
+            val c = s[right].code
+            counts[c]--
+            if (counts[c] == 0) keys--
 
-        // 存储 s和t 中每个字符出现的次数
-        val sMap = HashMap<Char, Int>()
-        val tMap = HashMap<Char, Int>()
-
-        for (char in t) {
-            val count = tMap[char] ?: 0
-            tMap[char] = count + 1
-        }
-
-        for (fastIndex in s.indices) {
-            val char = s[fastIndex]
-            val charCount = sMap[char] ?: 0
-            sMap[char] = charCount + 1
-
-            while (checkContain(sMap, tMap)) {
-                if (endIndex != -1) { // 第二次进入
-                    if (fastIndex - startIndex <= endIndex - slowIndex) {
-                        endIndex = fastIndex
-                        slowIndex = startIndex
-                    }
-                } else { // 第一次进入
-                    endIndex = fastIndex
-                    slowIndex = 0
+            while (keys == 0) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1
+                    start = left
                 }
-
-                // 开始移动起始窗口
-                val startChar = s[startIndex]
-                val startCharCount = (sMap[startChar] ?: 0) - 1
-                if (startCharCount < 1) {
-                    sMap.remove(startChar)
-                } else {
-                    sMap[startChar] = startCharCount
-                }
-
-                startIndex++
+                val leftChar = s[left].code
+                if (counts[leftChar] == 0) keys++
+                counts[leftChar]++
+                left++
             }
         }
 
-        return if (endIndex == -1) "" else s.substring(slowIndex, endIndex + 1)
+        return if (minLen == Int.MAX_VALUE) "" else s.substring(start, start + minLen)
     }
 }
 
