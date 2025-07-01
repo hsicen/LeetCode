@@ -17,7 +17,7 @@ package com.hsicen.code.array
  * 输入：array = [[1,2,3,4],[8,9,10,5],[7,6,11,12]]
  * 输出：[1,2,3,4,5,6,7,8,9,10,11,12]
  */
-object Solution146 {
+object Solution146LCR {
     fun spiralArray(array: Array<IntArray>): IntArray {
         if (array.isEmpty()) return IntArray(0)
 
