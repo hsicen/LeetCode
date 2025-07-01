@@ -59,14 +59,14 @@ public class Solution44KC {
         int minDiff = Integer.MAX_VALUE;
         // 横向切割
         int rowCut = 0;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             rowCut += rowSum[i];
             minDiff = Math.min(minDiff, Math.abs((sum - rowCut) - rowCut));
         }
 
-        // 纵向切割
+        // 纵向切割找最小值
         int columnCut = 0;
-        for (int j = 1; j < m; j++) {
+        for (int j = 0; j < m; j++) {
             columnCut += columnSum[j];
             minDiff = Math.min(minDiff, Math.abs((sum - columnCut) - columnCut));
         }
