@@ -17,4 +17,9 @@ public class Node {
     public Node(int data) {
         this.val = data;
     }
+
+    public Node(int data, Node next) {
+        this.val = data;
+        this.next = next;
+    }
 }
