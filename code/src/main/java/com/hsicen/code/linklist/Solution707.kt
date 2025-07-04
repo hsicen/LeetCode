@@ -31,52 +31,29 @@ package com.hsicen.code.linklist
  */
 object Solution707 {
     class MyLinkedList {
-        private var head: ListNode? = null
-        private var size = -1
+        private var size = 0
+        private var head: ListNode? = ListNode(0)
 
         //获取链表中下标为 index 的节点的值，如果下标无效，则返回 -1
         fun get(index: Int): Int {
-            if (index < 0 || head == null || index > size) return -1
+            if (index < 0 || index >= size) return -1
 
             var cur = head
-            var pos = 0
-            while (cur != null) {
-                if (pos == index) {
-                    return cur.`val`
-                } else {
-                    pos++
-                    cur = cur.next
-                }
+            for (pos in 0..index) {
+                cur = cur?.next
             }
 
-            return -1
+            return cur?.`val` ?: -1
         }
 
         // 将一个值为 val 的节点插入到链表中第一个元素之前
         fun addAtHead(`val`: Int) {
-            val node = ListNode(`val`)
-            if (head == null) {
-                head = node
-            } else {
-                node.next = head
-                head = node
-            }
-            size++
+            addAtIndex(0, `val`)
         }
 
         // 将一个值为 val 的节点追加到链表中作为链表的最后一个元素
         fun addAtTail(`val`: Int) {
-            val node = ListNode(`val`)
-            if (head == null) {
-                head = node
-            } else {
-                var cur = head
-                while (cur?.next != null) {
-                    cur = cur.next
-                }
-                cur?.next = node
-            }
-            size++
+            addAtIndex(size, `val`)
         }
 
         // 将一个值为 val 的节点插入到链表中下标为 index 的节点之前
@@ -85,55 +62,36 @@ object Solution707 {
         fun addAtIndex(index: Int, `val`: Int) {
             if (index > size) return
 
-            if (index == 0){
-                addAtHead(`val`)
-                return
+            val pos = Math.max(0, index)
+            size++
+            var pred = head
+            for (i in 0 until pos) {
+                pred = pred?.next
             }
 
             val node = ListNode(`val`)
-            var prev: ListNode? = null
-            var cur = head
-            var pos = 0
-            while (cur != null) {
-                if (pos == index) {
-                    node.next = cur
-                    prev?.next = node
-                    break
-                } else {
-                    prev = cur
-                    cur = cur.next
-                    pos++
-                }
-            }
+            node.next = pred?.next
+            pred?.next = node
         }
 
         //  如果下标存在，则删除对应下标节点
         fun deleteAtIndex(index: Int) {
-            if (index < 0 || head == null || index > size) return
-            if (index == 0) {
-                head = head?.next
-            } else {
-                var prev: ListNode? = null
-                var cur = head
-                var pos = 0
-                while (cur != null) {
-                    if (pos == index) {
-                        prev?.next = cur.next
-                        break
-                    } else {
-                        prev = cur
-                        cur = cur.next
-                        pos++
-                    }
-                }
+            if (index < 0 || index >= size) return
+            size--
+
+            var pred = head
+            for (i in 0 until index) {
+                pred = pred?.next
             }
+
+            pred?.next = pred.next?.next
         }
 
         fun printNode(msg: String) {
-            var cur = head
+            var cur = head?.next
             print("$msg: ")
             while (cur != null) {
-                print("${cur.`val`}->")
+                print("${cur.`val`} ")
                 cur = cur.next
             }
             println()
