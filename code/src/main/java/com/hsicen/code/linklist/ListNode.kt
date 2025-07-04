@@ -9,4 +9,14 @@ package com.hsicen.code.linklist
 data class ListNode(
     var `val`: Int,
     var next: ListNode? = null
-)
+) {
+
+    fun printNode(head: ListNode?) {
+        var cur = head
+        while (cur != null) {
+            print("${cur.`val`} ")
+            cur = cur.next
+        }
+        println()
+    }
+}
