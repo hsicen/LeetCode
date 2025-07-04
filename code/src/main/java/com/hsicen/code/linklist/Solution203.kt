@@ -21,15 +21,17 @@ package com.hsicen.code.linklist
  * 输出：[]
  */
 object Solution203 {
-    fun removeElements(head: Node?, `val`: Int): Node? {
-        val preHead = Node(-1, head)
+    fun removeElements(head: ListNode?, `val`: Int): ListNode? {
+        val preHead = ListNode(-1, head)
         var current = preHead
 
         while (current.next != null) {
-            if (current.next.`val` == `val`) {
-                current.next = current.next.next
-            } else {
-                current = current.next
+            current.next?.let {
+                if (it.`val` == `val`) {
+                    current.next = it.next
+                } else {
+                    current = it
+                }
             }
         }
 
@@ -38,15 +40,15 @@ object Solution203 {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val node7 = Node(6, null)
-        val node6 = Node(5, node7)
-        val node5 = Node(4, node6)
-        val node4 = Node(3, node5)
-        val node3 = Node(6, node4)
-        val node2 = Node(2, node3)
-        val node1 = Node(1, node2)
+        val node7 = ListNode(6, null)
+        val node6 = ListNode(5, node7)
+        val node5 = ListNode(4, node6)
+        val node4 = ListNode(3, node5)
+        val node3 = ListNode(6, node4)
+        val node2 = ListNode(2, node3)
+        val node1 = ListNode(1, node2)
 
-        var newHead = removeElements(node1, 6)
+        var newHead = removeElements(node1, 3)
         while (newHead != null) {
             println(newHead.`val`)
             newHead = newHead.next
