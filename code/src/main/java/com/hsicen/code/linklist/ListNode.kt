@@ -19,4 +19,14 @@ data class ListNode(
         }
         println()
     }
+
+    fun printNode(msg: String, head: ListNode?) {
+        var cur = head
+        print(msg)
+        while (cur != null) {
+            print("${cur.`val`} ")
+            cur = cur.next
+        }
+        println()
+    }
 }
