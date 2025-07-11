@@ -14,7 +14,7 @@ package com.hsicen.code.linklist
 object Solution7 {
 
     // 假设链表A的长度为a，链表B的长度为b，则相交的节点的个数为c；
-    // 则A走完a+b+c，B走完b+c+a，则A和B在c的起始位置相交
+    // 则A走完a+c+b，B走完b+c+a，则A和B在c的起始位置相交
     fun getIntersectionNode(headA: ListNode?, headB: ListNode?): ListNode? {
         if (headA == null || headB == null) return null
 
@@ -31,6 +31,18 @@ object Solution7 {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val nodeC5 = ListNode(5)
+        val nodeC4 = ListNode(4, nodeC5)
+        val nodeC8 = ListNode(8, nodeC4)
+        val nodeC1 = ListNode(1, nodeC8)
 
+        val nodeA1 = ListNode(1, nodeC1)
+        val nodeA4 = ListNode(4, nodeA1)
+
+        val nodeB0 = ListNode(0, nodeC1)
+        val nodeB5 = ListNode(5, nodeB0)
+
+        val intersectionNode = getIntersectionNode(nodeA4, nodeB5)
+        println("相交起始节点的值为：${intersectionNode?.`val`}")
     }
 }
