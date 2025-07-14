@@ -31,14 +31,23 @@ object Solution242 {
         }
     }
 
+
+    fun isAnagram2(s: String, t: String): Boolean {
+        val map = IntArray(26)
+        s.toCharArray().forEach { map[it - 'a'] += 1 }
+        t.toCharArray().forEach { map[it - 'a'] -= 1 }
+
+        return map.all { it == 0 }
+    }
+
     @JvmStatic
     fun main(args: Array<String>) {
         val s = "anagram"
         val t = "nagaram"
-        println("$s $t isAnagram=${isAnagram(s, t)}")
+        println("$s $t isAnagram=${isAnagram2(s, t)}")
 
         val s1 = "rat"
         val t1 = "car"
-        println("$s1 $t1 isAnagram=${isAnagram(s1, t1)}")
+        println("$s1 $t1 isAnagram=${isAnagram2(s1, t1)}")
     }
 }
