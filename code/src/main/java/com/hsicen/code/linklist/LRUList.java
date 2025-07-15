@@ -4,90 +4,151 @@ package com.hsicen.code.linklist;
  * <p>作者：Night  2019/3/19 11:12
  * <p>邮箱：codinghuang@163.com
  * <p>作用：
- * <p>描述：使用单链表实现LRU 缓存算法
+ * <p>描述：使用双向链表+HashMap实现LRU缓存算法
  */
 public class LRUList {
-    /**
-     * 缓存的大小
-     */
-    private int size = 10;
-    /**
-     * 单链表缓存维护
-     */
-    private Node cache;
-    /**
-     * 当前缓存容量
-     */
-    private int length = 0;
+    private int capacity;
+    private Node head;
+    private Node tail;
+    private java.util.Map<Integer, Node> cache;
 
-    public LRUList(int size) {
-        this.size = size;
-    }
+    private static class Node {
+        int key;
+        int val;
+        Node prev;
+        Node next;
 
-    /**
-     * 添加数据
-     */
-    public void add(int data) {
-        //链表为空
-        if (cache == null) {
-            cache = new Node(data);
-            return;
-        }
-
-        //判断是否缓存过数据(将缓存数据插入链表头部)
-        if (contain(data)) {
-            delete(data);
-            insert(data);
-        }
-
-        //判断缓存是否已满
-        if (length < size) {
-            insert(data);
+        Node(int key, int val) {
+            this.key = key;
+            this.val = val;
         }
     }
 
+    public LRUList(int capacity) {
+        this.capacity = capacity;
+        this.cache = new java.util.HashMap<>();
 
+        // 创建虚拟头尾节点
+        this.head = new Node(-1, -1);
+        this.tail = new Node(-1, -1);
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
+    }
+    
     /**
-     * 查找指定值
+     * 获取缓存值
      */
-    private boolean contain(int data) {
-        //链表为空
-        if (cache == null) return false;
-
-        while (cache != null) {
-            if (cache.val == data) return true;
-            cache = cache.next;
+    public int get(int key) {
+        Node node = cache.get(key);
+        if (node == null) {
+            return -1;
         }
 
-        return false;
+        // 移动到头部
+        moveToHead(node);
+        return node.val;
     }
-
+    
     /**
-     * 删除链表中指定数据
+     * 添加或更新缓存
      */
-    private boolean delete(int data) {
-        if (cache == null) return false;
+    public void put(int key, int value) {
+        Node node = cache.get(key);
 
-        while (cache != null) {
-            if (cache.val == data) {
-                cache = cache.next;
-                length--;
-                return true;
+        if (node != null) {
+            // 更新已存在的节点
+            node.val = value;
+            moveToHead(node);
+        } else {
+            // 添加新节点
+            Node newNode = new Node(key, value);
+
+            if (cache.size() >= capacity) {
+                // 删除尾部节点
+                Node last = removeTail();
+                cache.remove(last.key);
             }
 
-            cache = cache.next;
+            // 添加到头部
+            addToHead(newNode);
+            cache.put(key, newNode);
         }
+    }
+    
+    /**
+     * 添加节点到头部
+     */
+    private void addToHead(Node node) {
+        node.prev = head;
+        node.next = head.next;
 
-        return false;
+        head.next.prev = node;
+        head.next = node;
     }
 
     /**
-     * 使用头插法插入节点
+     * 删除节点
      */
-    private void insert(int data) {
-        Node newNode = new Node(data);
-        newNode.next = cache;
-        length++;
+    private void removeNode(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
 
+    /**
+     * 移动节点到头部
+     */
+    private void moveToHead(Node node) {
+        removeNode(node);
+        addToHead(node);
+    }
+
+    /**
+     * 删除尾部节点
+     */
+    private Node removeTail() {
+        Node last = tail.prev;
+        removeNode(last);
+        return last;
+    }
+
+    /**
+     * 为了兼容旧接口，保留add方法
+     */
+    public void add(int data) {
+        put(data, data);
+    }
+    
+    /**
+     * 打印当前缓存状态
+     */
+    public void printCache() {
+        Node current = head.next;
+        System.out.print("LRU Cache: ");
+        while (current != tail) {
+            System.out.print(current.key + "->" + current.val + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    /**
+     * 测试方法
+     */
+    public static void main(String[] args) {
+        LRUList lru = new LRUList(3);
+
+        lru.put(1, 1);
+        lru.put(2, 2);
+        lru.put(3, 3);
+        lru.printCache(); // 3->3 2->2 1->1
+
+        lru.get(2); // 访问2，移动到头部
+        lru.printCache(); // 2->2 3->3 1->1
+
+        lru.put(4, 4); // 添加4，删除最久未使用的1
+        lru.printCache(); // 4->4 2->2 3->3
+
+        System.out.println("Get 1: " + lru.get(1)); // -1 (not found)
+        System.out.println("Get 2: " + lru.get(2)); // 2
+    }
 }

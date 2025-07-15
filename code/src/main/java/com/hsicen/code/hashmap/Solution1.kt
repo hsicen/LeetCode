@@ -25,35 +25,45 @@ package com.hsicen.code.hashmap
 object Solution1 {
 
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        if (nums.isEmpty()) return intArrayOf()
-        val map = HashMap<Int, Int>()
+        if (nums.size < 2) return intArrayOf()
+        val map = hashMapOf<Int, Int>()
 
-        for (pos in nums.indices) {
-            val tmp = nums[pos]
-            val diff = target - tmp
-
-            if (map.containsKey(diff)) {
-                return intArrayOf(map[diff]!!, pos)
-            } else {
-                map[tmp] = pos
-            }
+        nums.forEachIndexed { index, num ->
+            val complement = target - num
+            map[complement]?.let { return intArrayOf(it, index) }
+            map[num] = index
         }
 
         return intArrayOf()
     }
 
+    // 优化版本：使用更简洁的写法
+    fun twoSumOptimized(nums: IntArray, target: Int): IntArray {
+        val map = mutableMapOf<Int, Int>()
+
+        return nums.mapIndexed { index, num ->
+            val complement = target - num
+            map[complement]?.let { return intArrayOf(it, index) }
+            map[num] = index
+        }.let { intArrayOf() }
+    }
+
     @JvmStatic
     fun main(args: Array<String>) {
         val nums = intArrayOf(2, 7, 11, 15)
-        println(twoSum(nums, 9).contentToString())
+        println("Original: ${twoSum(nums, 9).contentToString()}")
+        println("Optimized: ${twoSumOptimized(nums, 9).contentToString()}")
 
         val nums2 = intArrayOf(3, 2, 4)
-        println(twoSum(nums2, 6).contentToString())
+        println("Original: ${twoSum(nums2, 6).contentToString()}")
+        println("Optimized: ${twoSumOptimized(nums2, 6).contentToString()}")
 
         val nums3 = intArrayOf(3, 3)
-        println(twoSum(nums3, 6).contentToString())
+        println("Original: ${twoSum(nums3, 6).contentToString()}")
+        println("Optimized: ${twoSumOptimized(nums3, 6).contentToString()}")
 
         val nums4 = intArrayOf(3, 2, 4, 7)
-        println(twoSum(nums4, 12).contentToString())
+        println("Original: ${twoSum(nums4, 12).contentToString()}")
+        println("Optimized: ${twoSumOptimized(nums4, 12).contentToString()}")
     }
 }
