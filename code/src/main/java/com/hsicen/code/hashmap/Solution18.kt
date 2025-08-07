@@ -1,6 +1,5 @@
 package com.hsicen.code.hashmap
 
-
 /**
  * @author: hsc
  * @date: 2025/8/7 14:29
@@ -34,16 +33,25 @@ object Solution18 {
             // 去重：如果当前数字与前一个数字相同，则跳过
             if (i > 0 && nums[i] == nums[i - 1]) continue
 
+            // 剪枝：如果当前最小可能和大于target，后续不可能有解
+            if ((nums[i] * 1L) + nums[i + 1] + nums[i + 2] + nums[i + 3] > (target * 1L)) break
+            // 剪枝：如果当前最大可能和小于target，尝试下一个i
+            if ((nums[i] * 1L) + nums[nums.size - 3] + nums[nums.size - 2] + nums[nums.size - 1] < (target * 1L)) continue
+
             for (j in (i + 1) until nums.size - 2) {
                 // 去重：如果当前数字与前一个数字相同，则跳过
                 if (j > i + 1 && nums[j] == nums[j - 1]) continue
+
+                // 剪枝：如果当前最小可能和大于target，后续不可能有解
+                if ((nums[i] * 1L) + nums[j] + nums[j + 1] + nums[j + 2] > (target * 1L)) break
+                // 剪枝：如果当前最大可能和小于target，尝试下一个j
+                if ((nums[i] * 1L) + nums[j] + nums[nums.size - 2] + nums[nums.size - 1] < (target * 1L)) continue
 
                 var left = j + 1
                 var right = nums.size - 1
 
                 while (left < right) {
-                    val sum =
-                        nums[i].toLong() + nums[j].toLong() + nums[left].toLong() + nums[right].toLong()
+                    val sum = (nums[i] * 1L) + nums[j] + nums[left] + nums[right]
 
                     when {
                         sum == target.toLong() -> {
@@ -57,7 +65,7 @@ object Solution18 {
                             right--
                         }
 
-                        sum < target -> {
+                        sum < target.toLong() -> {
                             left++
                         }
 
