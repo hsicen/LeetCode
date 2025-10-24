@@ -29,6 +29,7 @@ object SolutionKC55 {
         val chars = s.toCharArray()
         val len = chars.size
 
+        // 反转顺序不同，可以实现不同的旋转算法
         reverse(chars, 0, len - 1)
         reverse(chars, 0, k - 1)
         reverse(chars, k, len - 1)
@@ -47,8 +48,9 @@ object SolutionKC55 {
             right--
         }
     }
-}
 
-fun main() {
-    println(SolutionKC55.rotateString("abcdefg", 2))
+    @JvmStatic
+    fun main(args: Array<String>) {
+        println(rotateString("abcdefg", 2))
+    }
 }
